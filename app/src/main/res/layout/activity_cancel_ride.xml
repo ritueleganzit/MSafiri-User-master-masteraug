@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#fff"
+    android:layout_width="wrap_content"
+    android:layout_height="400dp">
+
+
+    <RelativeLayout
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/no_passenger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Passengers"
+            android:visibility="gone"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_centerInParent="true"/>
+
+
+
+        <RelativeLayout
+            android:id="@+id/top"
+            android:layout_width="match_parent"
+            android:visibility="visible"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:orientation="horizontal">
+
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:fontFamily="@font/roboto_medium"
+                        android:textColor="#000"
+                        android:layout_gravity="center"
+                        android:textStyle="bold"
+                        android:text="Select Passenger who cancel the trip"/>
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+       <FrameLayout
+           android:layout_below="@+id/top"
+android:id="@+id/ps"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           >
+           <android.support.v7.widget.RecyclerView
+               android:id="@+id/passengers"
+               android:overScrollMode="never"
+               android:visibility="visible"
+               android:background="#ffffff"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+           </android.support.v7.widget.RecyclerView>
+
+           <!--<ProgressBar
+               android:layout_below="@+id/top"
+               android:layout_gravity="center"
+               android:id="@+id/progrss"
+               style="?android:attr/progressBarStyleSmall"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               />-->
+       </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_below="@+id/ps"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#000"
+                android:id="@+id/reason"
+                android:layout_gravity="center"
+                android:text="Reason"/>
+            <EditText
+                android:layout_marginTop="10dp"
+                android:textSize="13sp"
+                android:id="@+id/editreason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_light"
+                android:hint="Enter Reason"/>
+
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="#000"
+                android:layout_gravity="center"
+                android:text="Are you sure you want to cancel trip?"/>
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>
