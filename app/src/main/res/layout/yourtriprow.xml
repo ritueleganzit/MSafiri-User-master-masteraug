@@ -15,14 +15,15 @@ android:orientation="vertical"
     android:layout_height="wrap_content">
 
 
-    <com.eleganz.msafiri.utils.SquareImageView
+    <ImageView
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
         android:layout_width="fill_parent"
         android:id="@+id/squareImageView"
-        android:scaleType="centerCrop"
         android:src="@drawable/mapp"
         android:layout_height="fill_parent">
 
-    </com.eleganz.msafiri.utils.SquareImageView>
+    </ImageView>
     <TextView
         android:layout_width="match_parent"
         android:text="Ongoing"

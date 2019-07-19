@@ -579,7 +579,7 @@ else {
             vehicle_name.setSelected(true);
             if ((driverData.getRating()!=null))
             {
-                if ((driverData.getRating().equalsIgnoreCase("null")  ))
+                if ((driverData.getRating().equalsIgnoreCase("null")  )  || ((driverData.getRating().equalsIgnoreCase("")  )))
                 {
 
                 }else {

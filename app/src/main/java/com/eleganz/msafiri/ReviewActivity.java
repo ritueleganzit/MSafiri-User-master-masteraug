@@ -210,9 +210,14 @@ progressDialog.dismiss();
                             }
                             if (ratings!=null && !(ratings.isEmpty()))
                             {
-                                addrating.setRating(Float.parseFloat(""+ratings));
+                                if (ratings.equalsIgnoreCase("null")){
+
+                                }else {
+                                    addrating.setRating(Float.parseFloat("" + ratings));
+                                }
 
                             }
+
 
 
 

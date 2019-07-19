@@ -86,7 +86,7 @@ ProgressDialog spotsDialog;
 
     boolean isVisible=true;
     TimerTask mTimerTask;
-    SquareImageView mapimg;
+    ImageView mapimg;
     final Handler handler = new Handler();
     Timer t = new Timer();
     MapView mapView;
@@ -142,7 +142,7 @@ GoogleMap map;
 
 
         historyData= (HistoryData) getIntent().getSerializableExtra("historyData");
-        if (historyData.getRating().equalsIgnoreCase("")) {
+        if ((historyData.getRating().equalsIgnoreCase("")) || (historyData.getRating().equalsIgnoreCase("null"))) {
 
             Log.d("kkklll", "--" + historyData.getRating());
 

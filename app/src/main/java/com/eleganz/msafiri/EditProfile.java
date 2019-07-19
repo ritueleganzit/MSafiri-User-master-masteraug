@@ -79,7 +79,7 @@ public class EditProfile extends AppCompatActivity {
     private static final int REQUEST_IMAGE = 2;
     protected static final int REQUEST_STORAGE_READ_ACCESS_PERMISSION = 101;
     private ArrayList<String> mSelectPath;
-
+    Pattern p = Pattern.compile("(254)?[7-9][0-9]{9}");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -274,7 +274,7 @@ public class EditProfile extends AppCompatActivity {
 
 
 
-                                Toast.makeText(EditProfile.this, "Data Saved Successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfile.this, "Successfully Saved", Toast.LENGTH_SHORT).show();
 
                             }
                         }

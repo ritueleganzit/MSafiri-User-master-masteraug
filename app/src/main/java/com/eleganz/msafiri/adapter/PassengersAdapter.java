@@ -36,7 +36,16 @@ public class PassengersAdapter extends RecyclerView.Adapter<PassengersAdapter.My
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, int i) {
         PassengerData passengerData=arrayList.get(i);
-        myViewHolder.psnamestatus.setText(passengerData.getStatus());
+
+        if (passengerData.getStatus().equalsIgnoreCase("booked"))
+        {
+            myViewHolder.psnamestatus.setText("missed");
+
+        }
+        else {
+            myViewHolder.psnamestatus.setText(passengerData.getStatus());
+
+        }
         myViewHolder.psname.setText(passengerData.getUsername());
 
 

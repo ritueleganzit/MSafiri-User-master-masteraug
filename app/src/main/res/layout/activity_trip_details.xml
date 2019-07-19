@@ -66,14 +66,15 @@
             android:layout_height="wrap_content">
 
 
-            <com.eleganz.msafiri.utils.SquareImageView
+            <ImageView
+                android:adjustViewBounds="true"
                 android:layout_width="fill_parent"
                 android:id="@+id/mapimg"
                 android:scaleType="centerCrop"
                 android:src="@drawable/mapp"
                 android:layout_height="fill_parent">
 
-            </com.eleganz.msafiri.utils.SquareImageView>
+            </ImageView>
 
             <LinearLayout
                 android:layout_width="match_parent"

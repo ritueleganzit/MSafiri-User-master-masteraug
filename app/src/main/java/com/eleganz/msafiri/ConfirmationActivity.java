@@ -225,7 +225,7 @@ apiInterface.getSingleTripData(trip_id, new Callback<Response>() {
 
                     String imgurl=childObjct.getString("photo");
 
-                    if ((childObjct.getString("ratting").equalsIgnoreCase("null") ))
+                    if ((childObjct.getString("ratting").equalsIgnoreCase("null") ) || ((childObjct.getString("ratting").equalsIgnoreCase("") )))
                     {
 
                     }else {

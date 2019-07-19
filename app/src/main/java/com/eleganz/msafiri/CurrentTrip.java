@@ -472,7 +472,15 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
                             cr_vehicle_name.setText(""+childObjct.getString("vehicle_name")+" "+childObjct.getString("vehicle_number"));
                          //   cr_pickup.setText(""+childObjct.getString("from_title"));
                             cr_pickupaddress.setText(""+childObjct.getString("from_address"));
-                            ratingBar.setRating(Float.parseFloat(""+childObjct.getString("ratting")));
+                            if ((childObjct.getString("ratting").equalsIgnoreCase("null")) || (childObjct.getString("ratting").equalsIgnoreCase("")))
+                            {
+
+                            }else {
+                                ratingBar.setRating(Float.parseFloat(""+childObjct.getString("ratting")));
+
+                            }
+
+
                             fullname.setText(""+childObjct.getString("fullname"));
                             cr_destaddress.setText(""+childObjct.getString("to_address"));
                             cr_calculate_time.setText(""+childObjct.getString("calculate_time"));

@@ -143,7 +143,7 @@ date_selected.setText(""+getCurrentTimeStamp());
         card2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerDialog datePickerDialog=           new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                DatePickerDialog datePickerDialog=           new DatePickerDialog(getActivity(), android.R.style.Theme_Holo_Light_Dialog, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
@@ -177,7 +177,7 @@ date_selected.setText(""+getCurrentTimeStamp());
 
                     }
                 },myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH));
-
+datePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
                 datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
                 datePickerDialog.show();

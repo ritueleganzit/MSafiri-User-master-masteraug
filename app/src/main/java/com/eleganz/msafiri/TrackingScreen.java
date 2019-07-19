@@ -437,7 +437,15 @@ RatingBar ratingBar;
                                     cr_pickupaddress.setText(""+jsonObject1.getString("from_title"));
                                     cr_destaddress.setText(""+jsonObject1.getString("to_title"));
                                     cr_calculate_time.setText(""+jsonObject1.getString("calculate_time")+"");
-                                    ratingBar.setRating(Float.parseFloat(""+jsonObject1.getString("rating")));
+                                    if ((jsonObject1.getString("rating").equalsIgnoreCase("")) || (jsonObject1.getString("rating")).equalsIgnoreCase("null"))
+
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        ratingBar.setRating(Float.parseFloat(""+jsonObject1.getString("rating")));
+                                    }
                                     Glide.with(TrackingScreen.this)
                                             .load(jsonObject1.getString("photo"))
                                             .into(fab)

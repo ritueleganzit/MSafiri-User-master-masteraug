@@ -36,19 +36,24 @@ public class SplashActivity extends AppCompatActivity {
             getWindow().setEnterTransition(fade);
             getWindow().setExitTransition(fade);
         }
-        Animation pop_anim = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.pop_anim);
+      /*  Animation pop_anim = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.pop_anim);
         final Animation flyin1 = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.flyin1);
         final Animation flyout1 = AnimationUtils.loadAnimation(SplashActivity.this, R.anim.flyout1);
 
-        logo=findViewById(R.id.logo);
-      logo.startAnimation(flyin1);
+     */   logo=findViewById(R.id.logo);
+     // logo.startAnimation(flyin1);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
+//
+               // logo.startAnimation(flyout1);
+                Intent i = new Intent(SplashActivity.this, MainActivity.class);
 
-                logo.startAnimation(flyout1);
+                startActivity(i);
+                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
-                flyout1.setAnimationListener(new Animation.AnimationListener() {
+                finish();
+              /*  flyout1.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
 
@@ -56,20 +61,16 @@ public class SplashActivity extends AppCompatActivity {
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        Intent i = new Intent(SplashActivity.this, MainActivity.class);
-               /* ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(SplashActivity.this, logo, "logo_transition");*/
-                        startActivity(i);
-                        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+               *//* ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(SplashActivity.this, logo, "logo_transition");*//*
 
-                        finish();
                     }
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
 
                     }
-                });
+                });*/
 
             }
         },3200);

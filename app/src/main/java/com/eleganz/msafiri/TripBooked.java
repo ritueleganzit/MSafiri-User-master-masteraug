@@ -103,6 +103,7 @@ public class TripBooked extends AppCompatActivity implements OnMapReadyCallback 
     private String TAG="TripBooked";
     HistoryData historyData;
     CircleImageView driver_fab;
+     AlertDialog alert;
     ArrayList<String> userslist;
 
     RecyclerView passengers;
@@ -166,10 +167,12 @@ StringBuilder stringBuilder;
             mapView.getMapAsync(this);
         }
 
-        historyData= (HistoryData) getIntent().getSerializableExtra("historyData");
+            historyData = (HistoryData) getIntent().getSerializableExtra("historyData");
+
+
         book_id=historyData.getBook_id();
 
-        if (historyData.getRating().equalsIgnoreCase("")) {
+        if ((historyData.getRating().equalsIgnoreCase("")) || (historyData.getRating().equalsIgnoreCase("null")) ) {
 
             Log.d("kkklll", "--" + historyData.getFrom_lng());
 
@@ -252,7 +255,7 @@ spotsDialog.show();
                  editreason=alertLayout.findViewById(R.id.editreason);
                  reason=alertLayout.findViewById(R.id.reason);
                 passengers=alertLayout.findViewById(R.id.passengers);
-                final AlertDialog alert = new AlertDialog.Builder(TripBooked.this)
+                alert = new AlertDialog.Builder(TripBooked.this)
                         .setView(alertLayout)
                         .setPositiveButton("Yes",null)
                         .setNegativeButton("No",null)
@@ -968,6 +971,22 @@ catch (Exception e)
        });
 
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (alert != null) {
+            alert.dismiss();
+            alert = null; }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (alert != null) {
+            alert.dismiss();
+            alert = null; }
     }
 }
 

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -207,7 +208,7 @@ if (historyData.getUser_trip_status().equalsIgnoreCase("booked")){
         TextView tvongoing;
 
         RobotoMediumTextView trip_price, fullname, vehicle_name;
-        SquareImageView squareImageView;
+        ImageView squareImageView;
         RibbonTag textribbon;
         public MyViewHolder(View itemView) {
             super(itemView);
