@@ -392,4 +392,15 @@ public interface ApiInterface {
             Callback<Response> callback
     );
 
+
+    ///New Api
+
+    @GET("/africastalking/example/regUserget.php")
+    void regUserMobile(
+            @Query("mobile_number") String mobile_number,
+            @Query("type") String type,
+            Callback<Response> callback
+
+    );
+
 }

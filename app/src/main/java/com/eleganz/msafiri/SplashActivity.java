@@ -47,7 +47,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 //
                // logo.startAnimation(flyout1);
-                Intent i = new Intent(SplashActivity.this, MainActivity.class);
+                Intent i = new Intent(SplashActivity.this, MobileRegisterationActivity.class);
 
                 startActivity(i);
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
