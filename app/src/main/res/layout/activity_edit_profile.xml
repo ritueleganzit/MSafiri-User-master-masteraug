@@ -171,7 +171,6 @@ android:fitsSystemWindows="true"
                     android:layout_width="match_parent"
                     android:maxLines="1"
                     android:fontFamily="@font/roboto_regular"
-                    android:focusable="false"
                     android:inputType="textEmailAddress"
                     android:layout_height="wrap_content"
                     android:hint="Email"
@@ -184,6 +183,7 @@ android:fitsSystemWindows="true"
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
+                android:visibility="gone"
 
                 android:layout_height="wrap_content"
                 app:errorTextAppearance="@style/error_appearance"

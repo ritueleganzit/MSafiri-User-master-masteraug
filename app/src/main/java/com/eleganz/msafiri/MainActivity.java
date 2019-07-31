@@ -139,7 +139,7 @@ String user_id,fname;
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        FacebookSdk.sdkInitialize(this.getApplicationContext());
+       /* FacebookSdk.sdkInitialize(this.getApplicationContext());
         AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_main);
         String serverClientId = "539677876010-9gqlsq4rqtrt7leh5jmqcosj0bmjt9gb.apps.googleusercontent.com";
@@ -154,8 +154,8 @@ firebaseAuth=FirebaseAuth.getInstance();
                 .requestProfile()
 
                 .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this /* Context */)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+        mGoogleApiClient = new GoogleApiClient.Builder(this *//* Context *//*)
+                .enableAutoManage(this *//* FragmentActivity *//*, this *//* OnConnectionFailedListener *//*)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         progressDialog.setCancelable(false);
@@ -164,23 +164,23 @@ firebaseAuth=FirebaseAuth.getInstance();
         sessionManager = new SessionManager(MainActivity.this);
         final Animation popin = AnimationUtils.loadAnimation(MainActivity.this, R.anim.pop_in);
 
-    /*    final Animation flyin1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin1);
+    *//*    final Animation flyin1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin1);
         final Animation flyin2 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin2);
         final Animation flyin3 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin3);
         final Animation flyin4 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin4);
         final Animation flyin5 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin5);
         final Animation flyin6 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin6);
         final Animation flyin7 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyin7);
-  */      currentTripSession = new CurrentTripSession(MainActivity.this);
+  *//*      currentTripSession = new CurrentTripSession(MainActivity.this);
 
-    /*    flyout1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout1);
+    *//*    flyout1 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout1);
         flyout2 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout2);
         final Animation flyout3 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout3);
         final Animation flyout4 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout4);
         final Animation flyout5 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout5);
         final Animation flyout6 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout6);
         final Animation flyout7 = AnimationUtils.loadAnimation(MainActivity.this, R.anim.flyout7);
-*/
+*//*
 
         if (sessionManager.isLoggedIn()) {
 
@@ -195,19 +195,19 @@ firebaseAuth=FirebaseAuth.getInstance();
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
                 finish();
             }
-            /*if (currentTripSession.hasTrip()) {
+            *//*if (currentTripSession.hasTrip()) {
 
                 Toast.makeText(this, "dfgdg", Toast.LENGTH_SHORT).show();
                 getSingleTripData();
             }
-            else {*/
+            else {*//*
 
            // }
 
         }
         initViews();
 
-/*
+*//*
         email.startAnimation(flyin1);
 
         password.startAnimation(flyin2);
@@ -218,8 +218,8 @@ firebaseAuth=FirebaseAuth.getInstance();
 
         loginregister.startAnimation(flyin5);
 
-        loginsigninwith.startAnimation(flyin6);*/
-        /*try {
+        loginsigninwith.startAnimation(flyin6);*//*
+        *//*try {
             PackageInfo info = getPackageManager().getPackageInfo(
                     "com.eleganz.msafiri",
                     PackageManager.GET_SIGNATURES);
@@ -228,26 +228,26 @@ firebaseAuth=FirebaseAuth.getInstance();
                 md.update(signature.toByteArray());
                 Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
-        } catch (PackageManager.NameNotFoundException e) {    } catch (NoSuchAlgorithmException e) {    }*/
+        } catch (PackageManager.NameNotFoundException e) {    } catch (NoSuchAlgorithmException e) {    }*//*
       //  bottom.startAnimation(flyin7);
-      /*   googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+      *//*   googleSignInOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
-        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);*/
+        mGoogleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);*//*
 
         // [START initialize_auth]
         // Initialize Firebase Auth
 
-        /*googleApiClient = new GoogleApiClient.Builder(MainActivity.this)
+        *//*googleApiClient = new GoogleApiClient.Builder(MainActivity.this)
                 .enableAutoManage(MainActivity.this , new GoogleApiClient.OnConnectionFailedListener() {
                     @Override
                     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
                     }
-                } *//* OnConnectionFailedListener *//*)
+                } *//**//* OnConnectionFailedListener *//**//*)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
-                .build();*/
+                .build();*//*
         google_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -293,7 +293,7 @@ firebaseAuth=FirebaseAuth.getInstance();
                     password.requestFocus();
                 } else {
 //
-                   /* email.startAnimation(flyout1);
+                   *//* email.startAnimation(flyout1);
 
                     password.startAnimation(flyout2);
 
@@ -305,21 +305,21 @@ firebaseAuth=FirebaseAuth.getInstance();
 
                     loginsigninwith.startAnimation(flyout6);
 
-                    bottom.startAnimation(flyout7);*/
+                    bottom.startAnimation(flyout7);*//*
 
                     progressBar.setVisibility(View.VISIBLE);
                   //  progressBar.startAnimation(flyin1);
                     getUserLogin();
-                   /* flyout3.setAnimationListener(new Animation.AnimationListener() {
+                   *//* flyout3.setAnimationListener(new Animation.AnimationListener() {
                         @Override
                         public void onAnimationStart(Animation animation) {
                             YoYo.with(Techniques.Bounce)
                                     .duration(700)
                                     .repeat(8)
                                     .playOn(logo);
-                            *//*progress.startAnimation(flyin1);
+                            *//**//*progress.startAnimation(flyin1);
                             progress.setVisibility(View.VISIBLE);
-                            animationDrawable.start();*//*
+                            animationDrawable.start();*//**//*
 
                         }
 
@@ -338,7 +338,7 @@ firebaseAuth=FirebaseAuth.getInstance();
 
                         }
                     });
-*/
+*//*
 
                 }
 
@@ -362,7 +362,7 @@ firebaseAuth=FirebaseAuth.getInstance();
             public void onClick(View view) {
                 KeyBoardEvent.hideKeyboard(MainActivity.this);
 
-              /*  logo.startAnimation(flyout1);
+              *//*  logo.startAnimation(flyout1);
 
                 email.startAnimation(flyout1);
 
@@ -376,7 +376,7 @@ firebaseAuth=FirebaseAuth.getInstance();
 
                 loginsigninwith.startAnimation(flyout6);
 
-                bottom.startAnimation(flyout7);*/
+                bottom.startAnimation(flyout7);*//*
 
                 startActivity(new Intent(MainActivity.this, RegistrationActivity.class));
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -461,7 +461,7 @@ firebaseAuth=FirebaseAuth.getInstance();
                     e.printStackTrace();
                 }
             }
-        });t.start();
+        });t.start();*/
     }
     private Bundle getFacebookData(final JSONObject object, final List<String> permissionNeeds) {
         Log.d("whereeeeeee"," innnnnnnnn getFacebookData");
@@ -677,7 +677,7 @@ firebaseAuth=FirebaseAuth.getInstance();
     @Override
     public void onStart() {
         super.onStart();
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
+       /* OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(mGoogleApiClient);
         if (opr.isDone()) {
             // If the user's cached credentials are valid, the OptionalPendingResult will be "done"
             // and the GoogleSignInResult will be available instantly. We can try and retrieve an
@@ -699,7 +699,7 @@ firebaseAuth=FirebaseAuth.getInstance();
                     handleSignInResult(googleSignInResult);
                 }
             });
-        }
+        }*/
         // Check if user is signed in (non-null) and update UI accordingly.
     }
 

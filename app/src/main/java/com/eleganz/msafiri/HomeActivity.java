@@ -200,7 +200,16 @@ noti_message=getIntent().getStringExtra("content");
         user_name = headerview.findViewById(R.id.user_name);
         Log.d(TAG, "" + photo);
         Log.d(TAG, "m" + user);
-        user_name.setText(user);
+
+        if (user != null && !user.isEmpty()) {
+            // doSomething
+            if (!user.equalsIgnoreCase("null"))
+            {
+                user_name.setText(user);
+            }
+
+
+        }
        /* navigationView.setVerticalFadingEdgeEnabled(true);
         for (int i = 0; i < navigationView.getChildCount(); i++) {
             navigationView.getChildAt(i).setOverScrollMode(View.OVER_SCROLL_NEVER);
@@ -222,13 +231,13 @@ noti_message=getIntent().getStringExtra("content");
 
 
 
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+           /* GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
                     .build();
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                     .build();
-            mGoogleApiClient.connect();
+            mGoogleApiClient.connect();*/
 
     }
    /* private void signOut() {
@@ -455,11 +464,21 @@ noti_message=getIntent().getStringExtra("content");
 
                                 if (jsonObject1.getString("fname")!=null && !(jsonObject1.getString("fname").isEmpty()))
                                 {
-                                    user_name.setText(jsonObject1.getString("fname"));
+
+                                        // doSomething
+                                        if (!jsonObject1.getString("fname").equalsIgnoreCase("null")) {
+                                            user_name.setText(jsonObject1.getString("fname"));
+
+
+                                    }
                                 }
                                 else
                                 {
-                                    user_name.setText(""+user);
+                                    if (!user.equalsIgnoreCase("null")) {
+                                        user_name.setText(""+user);
+
+                                    }
+
                                 }
 
                                 imagePreference.putString("photo", jsonObject1.getString("photo"));
@@ -588,7 +607,7 @@ if (user_trip_status.equalsIgnoreCase("completed")) {
                     Log.d(TAG, "->" + stringBuilder);
 
                     sessionManager.logoutUser();
-                    LoginManager.getInstance().logOut();
+                  /*  LoginManager.getInstance().logOut();
 
                     Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
                             new ResultCallback<Status>() {
@@ -597,7 +616,7 @@ if (user_trip_status.equalsIgnoreCase("completed")) {
                                     startActivity(new Intent(HomeActivity.this,MainActivity.class));
                                 }
                             });
-                }catch (Exception e)
+      */          }catch (Exception e)
                 {
 
                 }

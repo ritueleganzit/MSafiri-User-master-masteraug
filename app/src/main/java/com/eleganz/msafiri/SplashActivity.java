@@ -13,11 +13,14 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import com.crashlytics.android.Crashlytics;
+import com.eleganz.msafiri.session.SessionManager;
+
 import io.fabric.sdk.android.Fabric;
 
 public class SplashActivity extends AppCompatActivity {
 
     ImageView logo;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_splash);
 
+        sessionManager = new SessionManager(SplashActivity.this);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Fade fade = new Fade();
@@ -47,12 +51,26 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 //
                // logo.startAnimation(flyout1);
-                Intent i = new Intent(SplashActivity.this, MobileRegisterationActivity.class);
 
-                startActivity(i);
-                overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+                if (sessionManager.isLoggedIn()) {
+                    Intent i = new Intent(SplashActivity.this, HomeActivity.class);
 
-                finish();
+                    startActivity(i);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+                    finish();
+
+                }
+                else
+                {
+                    Intent i = new Intent(SplashActivity.this, MobileRegisterationActivity.class);
+
+                    startActivity(i);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
+                    finish();
+                }
+
               /*  flyout1.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {

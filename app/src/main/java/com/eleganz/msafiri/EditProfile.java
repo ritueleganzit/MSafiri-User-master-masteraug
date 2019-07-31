@@ -112,11 +112,18 @@ public class EditProfile extends AppCompatActivity {
         ImageView back = findViewById(R.id.back);
         if (login_type.equalsIgnoreCase("social")) {
             ch_password.setVisibility(View.GONE);
-            email.setText(emailtxt);
-            lname.setText(lnametxt);
+            if (emailtxt!=null &&  !(emailtxt.isEmpty()))
+            {
+                email.setText(emailtxt);
+
+            }
+            if (lnametxt!=null &&  !(lnametxt.isEmpty())) {
+
+                lname.setText(lnametxt);
+            }
 
         } else {
-            ch_password.setVisibility(View.VISIBLE);
+            ch_password.setVisibility(View.GONE);
             ch_password.setText(password);
         }
 
@@ -400,11 +407,6 @@ if(count==3)
             YoYo.with(Techniques.Shake).duration(700).repeat(0).playOn(email);
             email.requestFocus();
             return false;
-        } else if (ch_password.getText().toString().equals("")) {
-            ch_password.setError("" + getResources().getString(R.string.Please_Enter_Password));
-            YoYo.with(Techniques.Shake).duration(700).repeat(0).playOn(ch_password);
-            ch_password.requestFocus();
-            return false;
         }
 
 
@@ -598,23 +600,63 @@ if(count==3)
                                 sessionManager.updateImage(jsonObject1.getString("photo"));
 
                                 Glide.with(getApplicationContext()).load(jsonObject1.getString("photo")).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.pr)).into(profile_pic);
-                                email.setText(jsonObject1.getString("user_email"));
-                                fname.setText(jsonObject1.getString("fname"));
-                                lname.setText(jsonObject1.getString("lname"));
-                                phone.setText(jsonObject1.getString("mobile_number"));
+
+                                if (jsonObject1.getString("user_email") != null && !jsonObject1.getString("user_email").isEmpty()) {
+                                    // doSomething
+                                    if (!jsonObject1.getString("user_email").equalsIgnoreCase("null")) {
+                                        email.setText(jsonObject1.getString("user_email"));
+
+                                    }
+
+                                }
+
+
+                                if (jsonObject1.getString("fname") != null && !jsonObject1.getString("fname").isEmpty()) {
+                                    // doSomething
+                                    if (!jsonObject1.getString("fname").equalsIgnoreCase("null")) {
+                                        fname.setText(jsonObject1.getString("fname"));
+
+                                    }
+                                }
+
+                                if (jsonObject1.getString("lname") != null && !jsonObject1.getString("lname").isEmpty()) {
+                                    // doSomething
+                                    if (!jsonObject1.getString("lname").equalsIgnoreCase("null")) {
+                                        lname.setText(jsonObject1.getString("lname"));
+
+                                    }
+                                }
+                                if (jsonObject1.getString("mobile_number") != null && !jsonObject1.getString("mobile_number").isEmpty()) {
+                                    // doSomething
+                                    if (!jsonObject1.getString("mobile_number").equalsIgnoreCase("null")) {
+                                        phone.setText(jsonObject1.getString("mobile_number"));
+
+                                    }
+                                }
+
 
                             } else {
                                 if (jsonObject1.getString("mobile_number").equalsIgnoreCase("")) {
 
                                 } else {
-                                    phone.setText(jsonObject1.getString("mobile_number"));
+                                    if (!jsonObject1.getString("mobile_number").equalsIgnoreCase("null")) {
+                                        phone.setText(jsonObject1.getString("mobile_number"));
+
+                                    }
                                 }
                                 if (jsonObject1.getString("lname").equalsIgnoreCase("")) {
 
                                 } else {
-                                    lname.setText(jsonObject1.getString("lname"));
+                                    if (!jsonObject1.getString("lname").equalsIgnoreCase("null")) {
+                                        lname.setText(jsonObject1.getString("lname"));
+
+                                    }
                                 }
-                                fname.setText(name);
+                                if (!name.equalsIgnoreCase("null")) {
+                                    fname.setText(name);
+
+                                }
+
                             }
                         }
 
@@ -637,7 +679,7 @@ if(count==3)
             @Override
             public void failure(RetrofitError error) {
                 Toast.makeText(EditProfile.this, "Network or server error, please try again later.", Toast.LENGTH_LONG).show();
-
+                dialog.dismiss();
             }
         });
 

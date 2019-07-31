@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.eleganz.msafiri.MainActivity;
+import com.eleganz.msafiri.MobileRegisterationActivity;
 
 import java.util.HashMap;
 
@@ -128,7 +129,7 @@ public class SessionManager {
         editor.commit();
 
         // After logout redirect user to Loing Activity
-        Intent i = new Intent(_context, MainActivity.class);
+        Intent i = new Intent(_context, MobileRegisterationActivity.class);
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);

@@ -20,7 +20,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".MobileRegisterationActivity"></activity>
+        <activity android:name=".MobileOTPActivity"></activity>
+        <activity android:name=".MobileRegisterationActivity" />
         <activity
             android:name=".AddPassenger"
             android:screenOrientation="portrait" />
@@ -41,11 +42,6 @@
         <service android:name=".utils.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
-        <service android:name=".utils.MyFirebaseInstanceIDService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service

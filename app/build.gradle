@@ -88,11 +88,11 @@ dependencies {
     //noinspection GradleCompatible
     implementation 'com.github.beigirad:ZigzagView:1.0.7'
     implementation 'com.google.android.gms:play-services-location:9.2.0'
-    implementation 'com.google.firebase:firebase-core:9.2.0'
-    implementation 'com.google.firebase:firebase-auth:9.2.0'
-    implementation 'com.google.firebase:firebase-messaging:9.2.0'
+    implementation 'com.google.firebase:firebase-messaging:17.+'
+
     implementation 'com.google.android.gms:play-services-auth:9.2.1'
 
+    implementation 'me.philio:pinentryview:1.1.0-SNAPSHOT'
 
     implementation 'com.chaos.view:pinview:1.4.2'
     implementation project(':multi-image-selector')

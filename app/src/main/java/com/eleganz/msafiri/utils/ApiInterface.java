@@ -395,9 +395,21 @@ public interface ApiInterface {
 
     ///New Api
 
-    @GET("/africastalking/example/regUserget.php")
+    @FormUrlEncoded
+    @POST("/africastalking/example/regUserget.php")
     void regUserMobile(
-            @Query("mobile_number") String mobile_number,
+            @Field("mobile_number") String mobile_number,
+            @Field("type") String type,
+            @Field("device_id") String device_id,
+            @Field("device_token") String device_token,
+            Callback<Response> callback
+
+    );
+
+    @GET("/Msafiri-AdminPanel/check-otp-userdata.php/")
+    void sentcode(
+            @Query("sentcode") String sentcode,
+            @Query("id") String id,
             @Query("type") String type,
             Callback<Response> callback
 
