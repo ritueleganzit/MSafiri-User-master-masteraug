@@ -45,7 +45,8 @@ public class Confirmation2Activity extends AppCompatActivity implements OnMapRea
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
-                        startActivity(new Intent(Confirmation2Activity.this,PaymentActivity.class));
+                        startActivity(new Intent(Confirmation2Activity.this,PaymentActivity.class)
+                        );
                     }
                 });
                 btncncl.setOnClickListener(new View.OnClickListener() {

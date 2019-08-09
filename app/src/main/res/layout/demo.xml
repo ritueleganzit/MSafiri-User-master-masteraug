@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:focusableInTouchMode="true"
+    android:layout_height="match_parent"
+    tools:context=".MobileOTPActivity">
+
+
+    <ImageView
+        android:src="@drawable/splashblur"
+        android:id="@+id/toolbar"
+        android:layout_marginTop="-10dp"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></ImageView>
+
+
+
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:id="@+id/layout"
+        android:paddingTop="10dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:background="@drawable/background_edittext"
+
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintBottom_toBottomOf="@+id/bg_img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:text="Get Moving With TuRyde"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_tv"
+
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4.0dip"
+                android:layout_marginTop="10.0dip"
+                android:layout_weight="0.1"
+                app:ccp_clickable="false"
+                android:background="@drawable/background_edittext"
+                android:padding="8.0dip"
+                app:ccp_defaultNameCode="KE"
+                app:ccp_textSize="13.0sp" />
+
+            <EditText
+                android:id="@+id/mobile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10.0dip"
+                android:layout_weight="1.0"
+                android:maxLength="10"
+
+                android:digits="-1234567890"
+                android:background="@drawable/background_edittext"
+                android:gravity="start|center"
+                android:hint="Phone Number"
+                android:inputType="number"
+                android:padding="15.0dip" />
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</FrameLayout>

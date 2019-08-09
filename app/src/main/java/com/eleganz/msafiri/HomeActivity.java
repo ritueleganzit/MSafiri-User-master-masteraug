@@ -49,7 +49,9 @@ import com.eleganz.msafiri.session.CurrentTripSession;
 import com.eleganz.msafiri.session.SessionManager;
 import com.eleganz.msafiri.utils.ApiInterface;
 import com.eleganz.msafiri.utils.MyFirebaseMessagingService;
+/*
 import com.facebook.login.LoginManager;
+*/
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -76,7 +78,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import spencerstudios.com.bungeelib.Bungee;
 
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
 

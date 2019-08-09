@@ -78,16 +78,35 @@
                         android:scaleType="centerInside"
                         android:orientation="vertical" >
 
-                        <ImageView
-                            android:transitionName="simple_activity_transition"
-android:background="@drawable/pr"
-                            android:id="@+id/profile_pic"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
-                            android:src="@drawable/pr" />
 
 
+
+                        <RelativeLayout
+                            android:id="@+id/user_add"
+                            android:layout_width="71dp"
+                            android:layout_height="71dp"
+                            >
+
+                            <ImageView
+                                android:transitionName="simple_activity_transition"
+                                android:background="@drawable/pr"
+                                android:id="@+id/profile_pic"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:src="@drawable/pr" />
+
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:padding="5dp"
+                                android:src="@drawable/ic_cam"
+                                android:background="@drawable/green_circle_bg"
+                                android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
+                                />
+
+                        </RelativeLayout>
 
                     </LinearLayout>
 
@@ -160,7 +179,6 @@ android:background="@drawable/pr"
                     android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:maxLines="1"
-                    android:focusable="false"
                     android:inputType="textEmailAddress"
                     android:layout_height="wrap_content"
                     android:hint="Email"

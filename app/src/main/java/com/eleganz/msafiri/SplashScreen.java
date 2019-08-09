@@ -18,10 +18,10 @@ public class SplashScreen extends AppCompatActivity {
         logo=(ImageView) findViewById(R.id.logo);
 
 
-                        Intent i = new Intent(SplashScreen.this, MainActivity.class);
+                        //Intent i = new Intent(SplashScreen.this, MainActivity.class);
                /* ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation(SplashActivity.this, logo, "logo_transition");*/
-                        startActivity(i);
+                        //startActivity(i);
                         overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
                         finish();

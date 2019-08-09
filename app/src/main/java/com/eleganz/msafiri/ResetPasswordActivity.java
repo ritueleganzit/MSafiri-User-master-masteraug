@@ -97,9 +97,9 @@ public class ResetPasswordActivity extends AppCompatActivity {
                         if (jsonObject.getString("status").equalsIgnoreCase("1"))
                         {
 
-                            Toast.makeText(ResetPasswordActivity.this, "Password has been reset", Toast.LENGTH_SHORT).show();
+                          /*  Toast.makeText(ResetPasswordActivity.this, "Password has been reset", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(ResetPasswordActivity.this,MainActivity.class));
-
+*/
 
                         }
                         else {

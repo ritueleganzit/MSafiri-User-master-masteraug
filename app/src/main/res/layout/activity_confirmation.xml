@@ -223,7 +223,7 @@ android:layout_alignParentTop="true"
                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                        android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:text="$30.00" />
+                       />
 
                </LinearLayout>
                <LinearLayout

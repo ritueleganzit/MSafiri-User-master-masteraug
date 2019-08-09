@@ -47,7 +47,6 @@ import retrofit.client.Response;
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
 
 public class SearchActivity extends AppCompatActivity implements LocationAdapter.LocationAdapterListener{
-    private static final String TAG = MainActivity.class.getSimpleName();
     private RecyclerView recyclerView;
     private List<LocationData> contactList;
     private LocationAdapter mAdapter;

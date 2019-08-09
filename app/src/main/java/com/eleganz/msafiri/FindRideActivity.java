@@ -62,13 +62,11 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import spencerstudios.com.bungeelib.Bungee;
 
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
 
 public class FindRideActivity extends AppCompatActivity implements AAH_FabulousFragment.Callbacks,MySampleFabFragment.OnCompleteListener {
     ImageView filterimg;
-    int img[]={R.drawable.kriti,R.drawable.kriti,R.drawable.kriti,R.drawable.kriti,R.drawable.kriti,R.drawable.kriti,R.drawable.kriti,R.drawable.kriti,R.drawable.kriti};
     ListView findridelist;
 
     FloatingActionButton fab;
@@ -93,7 +91,7 @@ public class FindRideActivity extends AppCompatActivity implements AAH_FabulousF
             @Override
             public void onClick(View view) {
                 onBackPressed();
-                Bungee.swipeRight(FindRideActivity.this);
+              //  Bungee.swipeRight(FindRideActivity.this);
             }
         });
         sessionManager=new SessionManager(FindRideActivity.this);
@@ -567,12 +565,12 @@ else {
 
             if (driverData.getPrice().equalsIgnoreCase("null"))
             {
-                trip_price.setText("$ 0");
+                trip_price.setText("KES 0");
 
             }
             else
             {
-                trip_price.setText("$ "+driverData.getPrice());
+                trip_price.setText("KES "+driverData.getPrice());
             }
 
 

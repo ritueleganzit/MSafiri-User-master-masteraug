@@ -11,7 +11,6 @@ import com.eleganz.msafiri.session.SessionManager;
 
 import java.util.HashMap;
 
-import spencerstudios.com.bungeelib.Bungee;
 
 public class LegalActivity extends AppCompatActivity {
     SessionManager sessionManager;

@@ -60,7 +60,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import spencerstudios.com.bungeelib.Bungee;
 
 import static android.app.Activity.RESULT_OK;
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
@@ -345,7 +344,7 @@ datePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.trans
                             .putExtra("get_date",date_selected.getText().toString())
                             .putExtra("seats",no_of_seats.getText().toString()));
                     //getActivity().overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                    Bungee.swipeLeft(getActivity());
+                   // Bungee.swipeLeft(getActivity());
                 }
             }
         });
@@ -684,6 +683,7 @@ datePickerDialog.getWindow().setBackgroundDrawableResource(android.R.color.trans
     public void tripFavoritelist()
     {
 
+Log.d("dsdsssdf",""+user_id);
         final StringBuilder stringBuilder=new StringBuilder();
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(BASEURL).build();
 

@@ -57,7 +57,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import spencerstudios.com.bungeelib.Bungee;
 
 public class YourTripsActivity extends AppCompatActivity  {
     SessionManager sessionManager;

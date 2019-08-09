@@ -368,13 +368,13 @@ button.setOnClickListener(new View.OnClickListener() {
         if (historyData.getTrip_price()!=null && !historyData.getTrip_price().isEmpty())
 
         {
-            trip_rate.setText("$ "+historyData.getTrip_price());
+            trip_rate.setText("KES "+historyData.getTrip_price());
 
 
         }
         if (historyData.getTrip_price().equalsIgnoreCase("null"))
         {
-            trip_rate.setText("$ 0" );
+            trip_rate.setText("KES 0" );
 
         }
 

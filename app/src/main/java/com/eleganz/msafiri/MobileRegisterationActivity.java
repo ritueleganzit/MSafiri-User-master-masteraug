@@ -1,10 +1,16 @@
 package com.eleganz.msafiri;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
+import android.provider.Settings;
+import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,6 +27,13 @@ import com.eleganz.msafiri.utils.ApiInterface;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +42,7 @@ import org.json.JSONObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 import retrofit.Callback;
 import retrofit.RestAdapter;
@@ -44,13 +58,14 @@ public class MobileRegisterationActivity extends AppCompatActivity {
     private String Token="";
     SessionManager sessionManager;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
         setContentView(R.layout.activity_mobile_registeration);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Fade fade = new Fade();
@@ -66,6 +81,7 @@ public class MobileRegisterationActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait");
         progressDialog.setCanceledOnTouchOutside(false);
         mobile=findViewById(R.id.mobile);
+        checkPermission();
         mobile.addTextChangedListener(new TextWatcher() {
             int len=0;
             @Override
@@ -150,7 +166,7 @@ public class MobileRegisterationActivity extends AppCompatActivity {
         Log.d("sdfsfs",""+strNew);
         Log.d("sdfsfs",""+Token);
 
-        apiInterface.regUserMobile(strNew, "userdata","android",Token, new Callback<Response>() {
+        apiInterface.regUserMobile("254"+strNew, "userdata","android",Token, new Callback<Response>() {
             @SuppressLint("LongLogTag")
             @Override
             public void success(Response response, Response response2) {
@@ -163,6 +179,7 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                         stringBuilder.append(line);
                     }
 
+                    Log.d("MOBILEREG",""+stringBuilder);
                     JSONObject jsonObject = new JSONObject("" + stringBuilder);
                     if (jsonObject != null) {
                         if (jsonObject.getString("message").equalsIgnoreCase("success")) {
@@ -171,7 +188,6 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-                                sessionManager.createLoginSession("manual",jsonObject1.getString("user_email"),jsonObject1.getString("lname"),jsonObject1.getString("user_id"), jsonObject1.getString("fname"), "", jsonObject1.getString("photo"));
 
 
 
@@ -179,17 +195,22 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                                 intent.putExtra("usertype",jsonObject1.getString("user_type"));
                                 intent.putExtra("id",jsonObject1.getString("user_id"));
                                 intent.putExtra("number","254"+strNew);
+                                intent.putExtra("user_email",jsonObject1.getString("user_email"));
+                                intent.putExtra("photo",jsonObject1.getString("photo"));
+                                intent.putExtra("fname",jsonObject1.getString("fname"));
+                                intent.putExtra("lname",jsonObject1.getString("lname"));
 
                                 startActivity(intent);
+                                finish();
 
 
                                 if (jsonObject1.getString("user_type").equalsIgnoreCase("newuser"))
                                 {
-                                    Toast.makeText(MobileRegisterationActivity.this, "new", Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(MobileRegisterationActivity.this, "new", Toast.LENGTH_SHORT).show();
                                 }
                                 else
                                 {
-                                    Toast.makeText(MobileRegisterationActivity.this, "existing", Toast.LENGTH_SHORT).show();
+                                   // Toast.makeText(MobileRegisterationActivity.this, "existing", Toast.LENGTH_SHORT).show();
                                 }
 
 
@@ -280,4 +301,70 @@ public class MobileRegisterationActivity extends AppCompatActivity {
             }
         });t.start();
     }
+
+    public void checkPermission()
+    {
+        Dexter.withActivity(MobileRegisterationActivity.this)
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(MobileRegisterationActivity.this, "Error occurred! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
+    }
+
+    private void showSettingsDialog() {
+        android.support.v7.app.AlertDialog.Builder builder = new AlertDialog.Builder(MobileRegisterationActivity.this);
+        builder.setTitle("Need Permissions");
+        builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+        builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+                openSettings();
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
+    }
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
+    }
+
+
 }

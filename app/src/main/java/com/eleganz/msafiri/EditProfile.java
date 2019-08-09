@@ -271,7 +271,9 @@ if(count==3)
         final StringBuilder stringBuilder = new StringBuilder();
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(BASEURL).build();
         final ApiInterface apiInterface = restAdapter.create(ApiInterface.class);
-        apiInterface.updateProfile(user_id, phone.getText().toString(), "", fname.getText().toString(), lname.getText().toString(), "", email.getText().toString(), new Callback<Response>() {
+        String result = phone.getText().toString().replaceAll("[-+.^:,]","");
+
+        apiInterface.updateProfile(user_id, result, "", fname.getText().toString(), lname.getText().toString(), "", email.getText().toString(), new Callback<Response>() {
             @Override
             public void success(Response response, Response response2) {
                 dialog.dismiss();
@@ -295,7 +297,10 @@ if(count==3)
                                 Log.d("mobile_number", "" + jsonObject.getString("mobile_number"));
 
                                 if (jsonObject.getString("mobile_number") != null && !jsonObject.getString("mobile_number").isEmpty()) {
-                                    phone.setText(jsonObject.getString("mobile_number"));
+                                   // String data = jsonObject.getString("mobile_number").substring(0,3)+ "-" + jsonObject.getString("mobile_number").substring(4, 7)+"-"+jsonObject.getString("mobile_number").substring(7,12);
+                                    String data=jsonObject.getString("mobile_number").substring(0,0)+"+"+jsonObject.getString("mobile_number").substring(0,3)+"-"+jsonObject.getString("mobile_number").substring(3,6)+"-"+jsonObject.getString("mobile_number").substring(6,jsonObject.getString("mobile_number").length());
+
+                                    phone.setText(data);
                                 }
 
 
@@ -492,7 +497,8 @@ if(count==3)
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(BASEURL).build();
         final ApiInterface apiInterface = restAdapter.create(ApiInterface.class);
         TypedFile typedFile=new TypedFile("multipart/form-data",new File(""+mediapath.trim()));
-        apiInterface.updateProfilewithImage(user_id, phone.getText().toString(), "", fname.getText().toString()
+        String result = phone.getText().toString().replaceAll("[-+.^:,]","");
+        apiInterface.updateProfilewithImage(user_id, result, "", fname.getText().toString()
                 , lname.getText().toString(),  email.getText().toString(),typedFile, new Callback<Response>() {
                     @Override
                     public void success(Response response, Response response2) {
@@ -521,8 +527,11 @@ if(count==3)
                                             Log.d("myeditimage",""+imgurl);
 
                                             if(strphone != null && !strphone.isEmpty()) {
+                                             //   String data = jsonObject.getString("mobile_number").substring(0,3)+ "-" + jsonObject.getString("mobile_number").substring(4, 7)+"-"+jsonObject.getString("mobile_number").substring(7,12);
 
-                                                phone.setText(jsonObject.getString("mobile_number"));
+                                                String data=jsonObject.getString("mobile_number").substring(0,0)+"+"+jsonObject.getString("mobile_number").substring(0,3)+"-"+jsonObject.getString("mobile_number").substring(3,6)+"-"+jsonObject.getString("mobile_number").substring(6,jsonObject.getString("mobile_number").length());
+
+                                                phone.setText(data);
                                             }
                                             if (imgurl!=null && !imgurl.isEmpty())
 
@@ -629,7 +638,13 @@ if(count==3)
                                 if (jsonObject1.getString("mobile_number") != null && !jsonObject1.getString("mobile_number").isEmpty()) {
                                     // doSomething
                                     if (!jsonObject1.getString("mobile_number").equalsIgnoreCase("null")) {
-                                        phone.setText(jsonObject1.getString("mobile_number"));
+                                       // String data = jsonObject1.getString("mobile_number").substring(0,3)+ "-" + jsonObject1.getString("mobile_number").substring(4, 7)+"-"+jsonObject1.getString("mobile_number").substring(7,12);
+                                        String data=jsonObject1.getString("mobile_number").substring(0,0)+"+"+jsonObject1.getString("mobile_number").substring(0,3)+"-"+jsonObject1.getString("mobile_number").substring(3,6)+"-"+jsonObject1.getString("mobile_number").substring(6,jsonObject1.getString("mobile_number").length());
+                                        Log.d("mmmm",""+data);
+                                        String result = data.replaceAll("[-+.^:,]","");
+                                        Log.d("mmmm",""+result);
+
+                                        phone.setText(data);
 
                                     }
                                 }
@@ -640,8 +655,10 @@ if(count==3)
 
                                 } else {
                                     if (!jsonObject1.getString("mobile_number").equalsIgnoreCase("null")) {
-                                        phone.setText(jsonObject1.getString("mobile_number"));
+                                     //   String data = jsonObject1.getString("mobile_number").substring(0,3)+ "-" + jsonObject1.getString("mobile_number").substring(4, 7)+"-"+jsonObject1.getString("mobile_number").substring(7,12);
+                                        String data=jsonObject1.getString("mobile_number").substring(0,0)+"+"+jsonObject1.getString("mobile_number").substring(0,3)+"-"+jsonObject1.getString("mobile_number").substring(3,6)+"-"+jsonObject1.getString("mobile_number").substring(6,jsonObject1.getString("mobile_number").length());
 
+                                        phone.setText(data);
                                     }
                                 }
                                 if (jsonObject1.getString("lname").equalsIgnoreCase("")) {

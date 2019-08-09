@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 
-import com.eleganz.msafiri.MainActivity;
 import com.eleganz.msafiri.MobileRegisterationActivity;
 
 import java.util.HashMap;
@@ -39,6 +38,7 @@ public class SessionManager {
     public static final String PASSWORD= "password";
     public static final String EMAIL= "email";
     public static final String LNAME= "lname";
+    public static final String PHONE= "phone";
 
 
     public static final String LOGIN_TYPE="login_type";
@@ -50,7 +50,7 @@ public class SessionManager {
     }
 
 
-    public void createLoginSession(String login_type,String email,String lname,String user_id,String fname,String password,String photo){
+    public void createLoginSession(String phone,String login_type,String email,String lname,String user_id,String fname,String password,String photo){
         // Storing login value as TRUE
         editor.putBoolean(IS_LOGIN, true);
 
@@ -62,6 +62,7 @@ public class SessionManager {
         editor.putString(LOGIN_TYPE, login_type);
         editor.putString(EMAIL, email);
         editor.putString(LNAME, lname);
+        editor.putString(PHONE, phone);
 
 
 
@@ -90,7 +91,7 @@ public class SessionManager {
         // Check login status
         if(!this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(_context, MainActivity.class);
+            Intent i = new Intent(_context, MobileRegisterationActivity.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
@@ -114,6 +115,7 @@ public class SessionManager {
         user.put(LOGIN_TYPE, pref.getString(LOGIN_TYPE, null));
         user.put(EMAIL, pref.getString(EMAIL, null));
         user.put(LNAME, pref.getString(LNAME, null));
+        user.put(PHONE, pref.getString(PHONE, null));
 
 
 

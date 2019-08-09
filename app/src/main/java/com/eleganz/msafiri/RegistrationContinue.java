@@ -149,6 +149,10 @@ emailtxt=hashMap.get(SessionManager.EMAIL);
                         editData();
                     }
                 }
+                else
+                {
+
+                }
 
             }
         });
@@ -322,12 +326,7 @@ emailtxt=hashMap.get(SessionManager.EMAIL);
             email.requestFocus();
             return false;
         }
-        else  if (ch_password.getText().toString().equals("")) {
-            ch_password.setError(""+getResources().getString(R.string.Please_Enter_Password));
-            YoYo.with(Techniques.Shake).duration(700).repeat(0).playOn(ch_password);
-            ch_password.requestFocus();
-            return false;
-        }
+
 
 
 

@@ -29,8 +29,8 @@ import com.eleganz.msafiri.model.Home;
 import com.eleganz.msafiri.model.Work;
 import com.eleganz.msafiri.session.SessionManager;
 import com.eleganz.msafiri.utils.ApiInterface;
-import com.facebook.Profile;
-import com.facebook.login.widget.ProfilePictureView;
+/*import com.facebook.Profile;
+import com.facebook.login.widget.ProfilePictureView;*/
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
@@ -55,7 +55,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import spencerstudios.com.bungeelib.Bungee;
 
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
 
@@ -508,7 +507,9 @@ dialog.show();
 
                                 {
                                     fname.setText(jsonObject1.getString("fname"));
-                                    phone.setText(jsonObject1.getString("mobile_number"));
+                                    String data=jsonObject1.getString("mobile_number").substring(0,0)+"+"+jsonObject1.getString("mobile_number").substring(0,3)+"-"+jsonObject1.getString("mobile_number").substring(3,6)+"-"+jsonObject1.getString("mobile_number").substring(6,jsonObject1.getString("mobile_number").length());
+
+                                    phone.setText(data);
 
                                 }
                             }else

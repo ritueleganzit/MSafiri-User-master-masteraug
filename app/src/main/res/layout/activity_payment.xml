@@ -56,15 +56,41 @@
         android:layout_height="wrap_content"
         android:textAllCaps="false"
         android:padding="10dp"
-        android:text="Choose Payment Method"/>
+        android:text="Be Sure you leave the right mobile number. If refund happens, the refund amount will be return to your Mpesa account"/>
 
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="PesaPay api"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>
+            android:orientation="horizontal">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="4.0dip"
+                android:layout_weight="0.1"
+                app:ccp_clickable="false"
+                android:background="@drawable/background_edittext"
+                android:padding="8.0dip"
+                app:ccp_defaultNameCode="KE"
+                app:ccp_textSize="13.0sp" />
+
+            <EditText
+                android:id="@+id/mobile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:maxLength="10"
+                android:focusable="false"
+                android:digits="-1234567890"
+                android:background="@drawable/background_edittext"
+                android:gravity="start|center"
+                android:hint="Phone Number"
+                android:inputType="phone"
+                android:padding="15.0dip" />
+        </LinearLayout>
 
     </LinearLayout>
     <Button

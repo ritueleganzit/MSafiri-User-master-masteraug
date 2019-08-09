@@ -58,7 +58,6 @@ import retrofit.Callback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import spencerstudios.com.bungeelib.Bungee;
 
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
 
@@ -198,11 +197,11 @@ progressDialog.dismiss();
                             if (childObjct.getString("trip_price").equalsIgnoreCase("null"))
 
                             {
-                                review_price.setText("$ 0");
+                                review_price.setText("KES 0");
                             }
                             else
                             {
-                                review_price.setText("$ "+childObjct.getString("trip_price"));
+                                review_price.setText("KES "+childObjct.getString("trip_price"));
                             }
 
                             if (comments!=null && !(comments.isEmpty())){

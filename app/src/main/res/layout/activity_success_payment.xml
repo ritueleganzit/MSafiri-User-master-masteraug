@@ -70,7 +70,7 @@
             android:layout_marginTop="10dp"
             android:id="@+id/txt2"
             android:gravity="center"
-            android:text="@string/payment"
+
 
             android:layout_centerHorizontal="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"/>

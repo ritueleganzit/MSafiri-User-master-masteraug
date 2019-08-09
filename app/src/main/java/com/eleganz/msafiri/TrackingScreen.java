@@ -426,11 +426,11 @@ RatingBar ratingBar;
                                     if (price!=null && !price.isEmpty())
 
                                     {
-                                        cr_trip_price.setText("$ "+jsonObject1.getString("trip_price"));
+                                        cr_trip_price.setText("KES "+jsonObject1.getString("trip_price"));
                                     }
                                     if (price.equalsIgnoreCase("null"))
                                     {
-                                        cr_trip_price.setText("$ 0" );
+                                        cr_trip_price.setText("KES 0" );
 
                                     }
                                     fullname.setText(""+jsonObject1.getString("fullname"));

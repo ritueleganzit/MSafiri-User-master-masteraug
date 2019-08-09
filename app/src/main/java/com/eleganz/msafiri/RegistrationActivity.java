@@ -99,9 +99,9 @@ public class RegistrationActivity extends AppCompatActivity {
         signtxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(RegistrationActivity.this,MainActivity.class));
+               /* startActivity(new Intent(RegistrationActivity.this,MainActivity.class));
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-                finish();
+                finish();*/
 /*
                 final String [] items = new String[] {"From Gallery", "From Camera"};
                 final Integer[] icons = new Integer[] {R.drawable.envelope, R.drawable.ic_action_name};
@@ -184,7 +184,7 @@ progressDialog.dismiss();
                         {
 
                             JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                            sessionManager.createLoginSession("manual",email.getText().toString(),"",jsonObject1.getString("user_id"),"",password.getText().toString(),"");
+                            sessionManager.createLoginSession("","manual",email.getText().toString(),"",jsonObject1.getString("user_id"),"",password.getText().toString(),"");
                         }
 
 

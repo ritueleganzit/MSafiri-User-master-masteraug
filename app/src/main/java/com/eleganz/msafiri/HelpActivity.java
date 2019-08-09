@@ -9,7 +9,6 @@ import com.eleganz.msafiri.session.SessionManager;
 
 import java.util.HashMap;
 
-import spencerstudios.com.bungeelib.Bungee;
 
 public class HelpActivity extends AppCompatActivity {
     SessionManager sessionManager;

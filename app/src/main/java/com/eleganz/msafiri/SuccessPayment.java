@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.eleganz.msafiri.lib.RobotoMediumTextView;
 import com.eleganz.msafiri.session.CurrentTripSession;
 import com.eleganz.msafiri.session.SessionManager;
 import com.eleganz.msafiri.updateprofile.CallAPiActivity;
@@ -37,7 +38,8 @@ import static com.eleganz.msafiri.utils.Constant.BASEURL;
 public class SuccessPayment extends AppCompatActivity {
 
     Button cntbtn;
-    String id;
+    String id,amount;
+    RobotoMediumTextView txt2;
     SessionManager sessionManager;
     ArrayList<String> mypassenger=new ArrayList<>();
     String user_id,trip_id,driver_id,photoPath,joinid;
@@ -54,7 +56,7 @@ public class SuccessPayment extends AppCompatActivity {
         sessionManager.checkLogin();
         mypassenger=getIntent().getStringArrayListExtra("mypassenger");
 
-
+        txt2=findViewById(R.id.txt2);
         final StringBuilder sb = new StringBuilder();
         for(int i=0;i<mypassenger.size();i++)
         {
@@ -76,6 +78,7 @@ public class SuccessPayment extends AppCompatActivity {
         dialog = new ProgressDialog(SuccessPayment.this);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
+        id=getIntent().getStringExtra("id");
         dialog.setMessage("Please Wait");
         callAPiActivity = new CallAPiActivity(this);
         HashMap<String, String> userData=sessionManager.getUserDetails();
@@ -84,6 +87,8 @@ public class SuccessPayment extends AppCompatActivity {
         HashMap<String, String> tripData=currentTripSession.getTripDetails();
         photoPath=getIntent().getStringExtra("photoPath");
         joinid=getIntent().getStringExtra("joinid");
+        amount=getIntent().getStringExtra("amount");
+        txt2.setText("Your payment of KES "+ amount+" has been succesfully received");
         trip_id=tripData.get(CurrentTripSession.TRIP_ID);
         driver_id=tripData.get(CurrentTripSession.DRIVER_ID);
         ImageView back=findViewById(R.id.back);
@@ -98,9 +103,11 @@ public class SuccessPayment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (!isFinishing())
                 dialog.show();
                 //confirmTrip(trip_id);
-                confirmTrips(trip_id,sb);
+                startActivity(new Intent(SuccessPayment.this,CurrentTrip.class).putExtra("id",id).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
 
             }
         });

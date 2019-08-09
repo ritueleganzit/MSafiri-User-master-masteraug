@@ -33,7 +33,7 @@ import java.util.HashMap;
 
 public class AddPassenger extends AppCompatActivity {
     SessionManager sessionManager;
-    String user_id,trip_id,photoPath,joinid,seats,username;
+    String user_id,trip_id,photoPath,joinid,seats,username,amount;
     CurrentTripSession currentTripSession;
     int Id=1;
     int Id2=1;
@@ -55,6 +55,7 @@ public class AddPassenger extends AppCompatActivity {
         seats=getIntent().getStringExtra("seats");
         photoPath=getIntent().getStringExtra("photoPath");
         joinid=getIntent().getStringExtra("joinid");
+        amount=getIntent().getStringExtra("amount");
         sessionManager.checkLogin();
 
         Log.d("etListetList",""+seats);
@@ -179,6 +180,7 @@ textView.setTypeface(face2);
                             .putExtra("joinid",joinid)
                             .putExtra("user_id",user_id)
                             .putExtra("trip_id",trip_id)
+                            .putExtra("amount",amount)
                             .putStringArrayListExtra("mypassenger",arrayList)
 
 

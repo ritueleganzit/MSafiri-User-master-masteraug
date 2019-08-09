@@ -55,10 +55,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         signtxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ForgotPasswordActivity.this,MainActivity.class));
+            /*    startActivity(new Intent(ForgotPasswordActivity.this,MainActivity.class));
                 overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
 
-                finish();
+                finish();*/
             }
         });
         final Animation flyin1 = AnimationUtils.loadAnimation(ForgotPasswordActivity.this, R.anim.flyin1);

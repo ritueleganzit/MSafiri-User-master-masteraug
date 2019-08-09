@@ -36,7 +36,7 @@ LinearLayout submit;
 TextView resendotp;
     SessionManager sessionManager;
 
-    String pinentered="",usertype="",id="",number="";
+    String pinentered="",usertype="",id="",number="",photo="",user_email="",lname="",fname="";
     ProgressDialog progressDialog;
     private String TAG="MobileOTPActivity";
 
@@ -53,6 +53,10 @@ TextView resendotp;
         usertype=getIntent().getStringExtra("usertype");
         number=getIntent().getStringExtra("number");
         id=getIntent().getStringExtra("id");
+        user_email=getIntent().getStringExtra("user_email");
+        lname=getIntent().getStringExtra("lname");
+        fname=getIntent().getStringExtra("fname");
+        photo=getIntent().getStringExtra("photo");
         progressDialog = new ProgressDialog(MobileOTPActivity.this);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(false);
@@ -116,7 +120,9 @@ apiInterface.sentcode(pinentered, id, "userdata", new Callback<Response>() {
 
                        if (usertype.equalsIgnoreCase("newuser"))
                         {
-                                Intent intent = new Intent(MobileOTPActivity.this, RegistrationContinue.class);
+                            sessionManager.createLoginSession(number,"manual",user_email,lname,id, fname, "", photo);
+
+                            Intent intent = new Intent(MobileOTPActivity.this, RegistrationContinue.class);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
@@ -125,7 +131,10 @@ apiInterface.sentcode(pinentered, id, "userdata", new Callback<Response>() {
                         }
                         else
                         {
-                                Intent intent = new Intent(MobileOTPActivity.this, HomeActivity.class);
+
+                            sessionManager.createLoginSession(number,"manual",user_email,lname,id, fname, "", photo);
+
+                            Intent intent = new Intent(MobileOTPActivity.this, HomeActivity.class);
                                 startActivity(intent);
                                 finish();
                                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

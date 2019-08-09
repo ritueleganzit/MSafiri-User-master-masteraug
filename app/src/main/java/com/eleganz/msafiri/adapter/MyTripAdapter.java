@@ -1,6 +1,7 @@
 package com.eleganz.msafiri.adapter;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -103,7 +104,7 @@ if (historyData.getUser_trip_status().equalsIgnoreCase("booked")){
         }*/
 
 
-        Log.d("myadapter",""+historyData.getUser_trip_status());
+        Log.d("myadapter",""+historyData.getTrip_screenshot());
         holder.desloc.setText("" + historyData.getTo_title());
         holder.pickuploc.setText("" + historyData.getFrom_title());
         holder.from_date.setText("" + parseDateToddMMyyyy2(historyData.getDate()));
@@ -117,12 +118,12 @@ if (historyData.getUser_trip_status().equalsIgnoreCase("booked")){
         if (historyData.getTrip_price()!=null && !historyData.getTrip_price().isEmpty())
 
         {
-            holder.trip_price.setText("$ " + historyData.getTrip_price());
+            holder.trip_price.setText("KES " + historyData.getTrip_price());
 
         }
         if (historyData.getTrip_price().equalsIgnoreCase("null"))
         {
-            holder.trip_price.setText("$ 0" );
+            holder.trip_price.setText("KES 0" );
 
         }
 

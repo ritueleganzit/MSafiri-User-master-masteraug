@@ -94,6 +94,7 @@ public class ConfirmationActivity extends AppCompatActivity implements OnMapRead
     RobotoMediumTextView fullname,vehicle_number,to_address,from_address,duration,cnf_trip_price;
     private String durationtxt;
     boolean isVisible=true;
+    String amount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -235,11 +236,13 @@ apiInterface.getSingleTripData(trip_id, new Callback<Response>() {
                     Log.d("imgurl",imgurl);
 
                     if (childObjct.getString("trip_price").equalsIgnoreCase("null")) {
-                        cnf_trip_price.setText("$ 0");
+                        cnf_trip_price.setText("KES 0");
+                        amount="0";
                     }
                     else
                     {
-                        cnf_trip_price.setText("$ "+childObjct.getString("trip_price"));
+                        amount=""+childObjct.getString("trip_price");
+                        cnf_trip_price.setText("KES "+childObjct.getString("trip_price"));
 
                     }
                         vehicle_number.setText(""+childObjct.getString("vehicle_name")+" "+childObjct.getString("vehicle_number"));
@@ -620,6 +623,7 @@ Log.d("theurl",url);
             }
 
             String filename = user_id+""+ System.currentTimeMillis()+".png";
+
             File file = new File(defaultFile,filename);
             if (file.exists()) {
                 file.delete();
@@ -647,6 +651,7 @@ dialog.dismiss();
             .putExtra("user_id",user_id)
             .putExtra("trip_id",trip_id)
             .putExtra("seats",seats)
+            .putExtra("amount",amount)
 
 
             );
@@ -699,4 +704,6 @@ dialog.dismiss();
         }
         return dstBmp;
     }
+
+
 }

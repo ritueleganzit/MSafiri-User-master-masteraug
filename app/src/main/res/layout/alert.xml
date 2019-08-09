@@ -27,11 +27,12 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:textColor="#000"
+        android:id="@+id/dataalert"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="50dp"
-        android:text="You are going to pay $30 with MPESA having phone number 00000000"
+        android:text=""
         android:layout_height="match_parent" />
 
     <Button

@@ -490,11 +490,11 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
                             if (price.equalsIgnoreCase("null"))
 
                             {
-                                cr_trip_price.setText("$ 0");
+                                cr_trip_price.setText("KES 0");
                             }
                             else
                             {
-                                cr_trip_price.setText("$ "+price);
+                                cr_trip_price.setText("KES "+price);
 
                             }
                             Glide.with(CurrentTrip.this)
