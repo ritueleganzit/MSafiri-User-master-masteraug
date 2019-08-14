@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.StrictMode;
@@ -49,6 +50,7 @@ import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
+import static com.eleganz.msafiri.PaymentActivity.SHARED_PREFERENCES;
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
 
 public class MobileRegisterationActivity extends AppCompatActivity {
@@ -57,6 +59,8 @@ public class MobileRegisterationActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
     private String Token="";
     SessionManager sessionManager;
+    SharedPreferences devicetokenpref;
+    SharedPreferences.Editor devicetokenprefeditor;
 
 
     @Override
@@ -75,13 +79,15 @@ public class MobileRegisterationActivity extends AppCompatActivity {
             getWindow().setEnterTransition(fade);
             getWindow().setExitTransition(fade);
         }
+        devicetokenpref=getSharedPreferences("devicetoken",MODE_PRIVATE);
+        devicetokenprefeditor=devicetokenpref.edit();
         progressDialog=new ProgressDialog(MobileRegisterationActivity.this);
         sessionManager = new SessionManager(MobileRegisterationActivity.this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please Wait");
         progressDialog.setCanceledOnTouchOutside(false);
         mobile=findViewById(R.id.mobile);
-        checkPermission();
+
         mobile.addTextChangedListener(new TextWatcher() {
             int len=0;
             @Override
@@ -94,6 +100,9 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                 if (str.length()==10)
                 {
                     if (Token!=null) {
+                        devicetokenprefeditor.putString("device",""+Token);
+                        devicetokenprefeditor.commit();
+                        devicetokenprefeditor.apply();
                         progressDialog.show();
                         getUserLogin();
                     }
@@ -107,14 +116,20 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                                     @Override
                                     public void onSuccess(InstanceIdResult instanceIdResult) {
                                         Token = instanceIdResult.getToken();
+
                                         Log.e("get token",Token);
                                     }
                                 });
                                 if (Token!=null)
                                 {
-
+                                    devicetokenprefeditor.putString("device",""+Token);
+                                    devicetokenprefeditor.commit();
+                                    devicetokenprefeditor.apply();
                                     Log.d("thisismytoken", Token);
-
+                                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("InstanceID", Token);
+                                    editor.commit();
                                     StrictMode.ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy.Builder().build();
                                     StrictMode.setThreadPolicy(threadPolicy);
                                     // getGoogleLogin(str_email,fname,lname,idtoken);
@@ -153,6 +168,8 @@ public class MobileRegisterationActivity extends AppCompatActivity {
 
 
         });
+        checkPermission();
+
     }
 
 
@@ -275,13 +292,17 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                     public void onSuccess(InstanceIdResult instanceIdResult) {
                         Token = instanceIdResult.getToken();
                         Log.e("get token",Token);
+
                     }
                 });
                 if (Token!=null)
                 {
 
                     Log.d("thisismytoken", Token);
-
+                    SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("InstanceID", Token);
+                    editor.commit();
                     StrictMode.ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy.Builder().build();
                     StrictMode.setThreadPolicy(threadPolicy);
                     // getGoogleLogin(str_email,fname,lname,idtoken);
@@ -300,6 +321,8 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                 }
             }
         });t.start();
+
+
     }
 
     public void checkPermission()
@@ -307,8 +330,8 @@ public class MobileRegisterationActivity extends AppCompatActivity {
         Dexter.withActivity(MobileRegisterationActivity.this)
                 .withPermissions(
                         Manifest.permission.READ_EXTERNAL_STORAGE,
+
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                        Manifest.permission.CAMERA,
                         Manifest.permission.ACCESS_FINE_LOCATION)
                 .withListener(new MultiplePermissionsListener() {
                     @Override
@@ -322,11 +345,16 @@ public class MobileRegisterationActivity extends AppCompatActivity {
                             // show alert dialog navigating to Settings
                             showSettingsDialog();
                         }
+                        if (report.getDeniedPermissionResponses().size()>0)
+                        {
+                           // Toast.makeText(MobileRegisterationActivity.this, ""+report.getDeniedPermissionResponses().get(0).getPermissionName(), Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
-                        token.continuePermissionRequest();
+                        //token.continuePermissionRequest();
+
                     }
                 }).
                 withErrorListener(new PermissionRequestErrorListener() {

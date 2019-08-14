@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <com.eleganz.msafiri.lib.RobotoMediumTextView
+                <com.eleganz.msafiri.lib.RobotoBoldTextView
                     android:id="@+id/vehicle_number"
                     android:layout_width="match_parent"
 
@@ -70,7 +70,7 @@
                         android:orientation="vertical">
 
 
-                        <TextView
+                        <com.eleganz.msafiri.lib.RobotoMediumTextView
                             android:id="@+id/pickuploc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -90,6 +90,7 @@
                                 android:id="@+id/from_pickup"
                                 android:backgroundTint="@color/colorPrimaryDark"
                                 android:hint="Pickup"
+                                android:fontFamily="@font/roboto_regular"
                                 android:cursorVisible="false"
 android:inputType="textNoSuggestions"
                                 android:singleLine="true"
@@ -131,7 +132,7 @@ android:inputType="textNoSuggestions"
                         android:orientation="vertical">
 
 
-                        <TextView
+                        <com.eleganz.msafiri.lib.RobotoMediumTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:ellipsize="end"
@@ -146,6 +147,7 @@ android:inputType="textNoSuggestions"
                             android:layout_height="wrap_content"
                             >
                             <EditText
+                                android:fontFamily="@font/roboto_regular"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:backgroundTint="@color/colorPrimaryDark"
@@ -193,7 +195,7 @@ android:inputType="textNoSuggestions"
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
-                <com.eleganz.msafiri.lib.RobotoMediumTextView
+                <com.eleganz.msafiri.lib.RobotoBoldTextView
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
@@ -207,7 +209,7 @@ android:inputType="textNoSuggestions"
                     android:textColorHint="#3B3B3B"
                     android:textStyle="bold" />
 
-                <com.eleganz.msafiri.lib.RobotoMediumTextView
+                <com.eleganz.msafiri.lib.RobotoBoldTextView
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:layout_gravity="right"
@@ -297,7 +299,7 @@ android:inputType="textNoSuggestions"
                     android:layout_gravity="right"
                     android:orientation="horizontal">
 
-                    <com.eleganz.msafiri.lib.RobotoMediumTextView
+                    <com.eleganz.msafiri.lib.RobotoBoldTextView
                         android:layout_width="wrap_content"
 
                         android:layout_height="wrap_content"
@@ -311,7 +313,7 @@ android:inputType="textNoSuggestions"
                         android:textColorHint="#3B3B3B"
                         android:textStyle="bold" />
 
-                    <com.eleganz.msafiri.lib.RobotoMediumTextView
+                    <com.eleganz.msafiri.lib.RobotoBoldTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/fullname"
@@ -336,6 +338,7 @@ android:inputType="textNoSuggestions"
             android:background="@drawable/bt_background"
             android:text="SEARCH"
             android:id="@+id/searchbtn"
+            android:fontFamily="@font/roboto_bold"
             android:layout_margin="5dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -364,7 +367,7 @@ android:inputType="textNoSuggestions"
                 android:id="@+id/lin_fav"
                 app:layout_constraintBottom_toBottomOf="@+id/searchbtn">
 
-                <com.eleganz.msafiri.lib.RobotoMediumTextView
+                <com.eleganz.msafiri.lib.RobotoBoldTextView
                     android:layout_width="match_parent"
 
                     android:layout_height="wrap_content"
@@ -388,7 +391,7 @@ android:inputType="textNoSuggestions"
                 </android.support.v7.widget.RecyclerView>
 
                 <TextView
-                    android:fontFamily="@font/roboto_light"
+                    android:fontFamily="@font/roboto_medium"
 
                     android:gravity="center"
                     android:visibility="gone"

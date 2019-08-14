@@ -287,7 +287,7 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
-    @POST("/updateProfile")
+    @POST("/userLogout")
     void logoutclearToken(
             @Field("device_token") String device_token,
             @Field("user_id") String user_id,

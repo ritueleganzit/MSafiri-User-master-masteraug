@@ -5,7 +5,10 @@ import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,6 +19,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bdhobare.mpesa.Mpesa;
+import com.bdhobare.mpesa.interfaces.AuthListener;
+import com.bdhobare.mpesa.interfaces.MpesaListener;
+import com.bdhobare.mpesa.utils.Pair;
 import com.eleganz.msafiri.api.ApiClient;
 import com.eleganz.msafiri.api.NotificationUtils;
 import com.eleganz.msafiri.api.SharedPrefsUtil;
@@ -53,9 +60,11 @@ import static com.eleganz.msafiri.api.AppConstants.PUSH_NOTIFICATION;
 import static com.eleganz.msafiri.api.AppConstants.REGISTRATION_COMPLETE;
 import static com.eleganz.msafiri.api.AppConstants.TOPIC_GLOBAL;
 import static com.eleganz.msafiri.api.AppConstants.TRANSACTION_TYPE;
+import static com.eleganz.msafiri.api.BuildConfig.CONSUMER_KEY;
+import static com.eleganz.msafiri.api.BuildConfig.CONSUMER_SECRET;
 import static com.eleganz.msafiri.utils.Constant.BASEURL;
 
-public class PaymentActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity implements AuthListener, MpesaListener {
     SessionManager sessionManager;
     String user_id,trip_id,photoPath,joinid;
     CurrentTripSession currentTripSession;
@@ -69,6 +78,20 @@ public class PaymentActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
     private ApiClient mApiClient;
     String URLCONFIRM = "http://itechgaints.com/M-safiri-API/confirmTrip";
+
+/*
+
+    public static final String BUSINESS_SHORT_CODE = "174379";
+    public static final String PASSKEY = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+    public static final String CONSUMER_KEY = "Q3lYYPW9e11Pkigg1jSYjos0kvgHoIi2";
+    public static final String CONSUMER_SECRET = "mGYMl4zznpqxSVeo";
+    public static final String CALLBACK_URL = "https://makara.co.ke:8443/odt/checkout";
+*/
+
+
+    public static final String  NOTIFICATION = "PushNotification";
+    public static final String SHARED_PREFERENCES = "com.bdhobare.mpesa_android_sdk";
+
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     ArrayList<String> mypassenger=new ArrayList<>();
@@ -82,13 +105,15 @@ public class PaymentActivity extends AppCompatActivity {
         mApiClient.setIsDebug(true); //Set True to enable logging, false to disable.
         mSharedPrefsUtil = new SharedPrefsUtil(this);
 
-        getAccessToken();
+       // getAccessToken();
         sessionManager=new SessionManager(PaymentActivity.this);
         mProgressDialog = new ProgressDialog(this);
+        mProgressDialog.setMessage("Please Wait");
         currentTripSession=new CurrentTripSession(PaymentActivity.this);
         HashMap<String, String> tripData=currentTripSession.getTripDetails();
         trip_id=tripData.get(CurrentTripSession.TRIP_ID);
         driver_id=tripData.get(CurrentTripSession.DRIVER_ID);
+        Mpesa.with(this, CONSUMER_KEY, CONSUMER_SECRET);
 
         photoPath=getIntent().getStringExtra("photoPath");
         joinid=getIntent().getStringExtra("joinid");
@@ -139,7 +164,7 @@ public class PaymentActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        performSTKPush("254743236784");
+                        pay("254743236784", ""+amount);
 
                     }
                 });
@@ -153,69 +178,75 @@ public class PaymentActivity extends AppCompatActivity {
         mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-
-                // checking for type intent filter
-                if (intent.getAction().equals(REGISTRATION_COMPLETE)) {
-                    // gcm successfully registered
-                    // now subscribe to `global` topic to receive app wide notifications
-                    FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_GLOBAL);
-                    getFirebaseRegId();
-
-                } else if (intent.getAction().equals(PUSH_NOTIFICATION)) {
+                if (intent.getAction().equals(NOTIFICATION)) {
+                    String title = intent.getStringExtra("title");
                     String message = intent.getStringExtra("message");
-                    NotificationUtils.createNotification(getApplicationContext(), message);
-                    showResultDialog(message);
+                    int code = intent.getIntExtra("code", 0);
+                 //   showDialog(title, message, code);
+                    Toast.makeText(context, ""+title, Toast.LENGTH_SHORT).show();
+
                 }
             }
         };
+       // getFirebaseRegId();
 
-        getFirebaseRegId(); mRegistrationBroadcastReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
 
-                // checking for type intent filter
-                if (intent.getAction().equals(REGISTRATION_COMPLETE)) {
-                    // gcm successfully registered
-                    // now subscribe to `global` topic to receive app wide notifications
-                    FirebaseMessaging.getInstance().subscribeToTopic(TOPIC_GLOBAL);
-                    getFirebaseRegId();
+      //  getFirebaseRegId();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
 
-                } else if (intent.getAction().equals(PUSH_NOTIFICATION)) {
-                    String message = intent.getStringExtra("message");
-                    NotificationUtils.createNotification(getApplicationContext(), message);
-                    showResultDialog(message);
-                }
-            }
-        };
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(NOTIFICATION));
 
-        getFirebaseRegId();
+    }
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
     }
 
-    private void getAccessToken() {
-        mApiClient.setGetAccessToken(true);
-        mApiClient.mpesaService().getAccessToken().enqueue(new Callback<AccessToken>() {
-            @Override
-            public void onResponse(@NonNull Call<AccessToken> call, @NonNull Response<AccessToken> response) {
+    private void pay(String phone, String amount){
+        mProgressDialog.show();
+        com.bdhobare.mpesa.models.STKPush.Builder builder = new com.bdhobare.mpesa.models.STKPush.Builder(BUSINESS_SHORT_CODE, PASSKEY, Integer.parseInt(amount),BUSINESS_SHORT_CODE, phone);
 
-                if (response.isSuccessful()) {
-                    mApiClient.setAuthToken(response.body().accessToken);
-                }
-            }
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        String token = sharedPreferences.getString("InstanceID", "");
 
-            @Override
-            public void onFailure(@NonNull Call<AccessToken> call, @NonNull Throwable t) {
+        Log.d("mpesaurl",""+BUSINESS_SHORT_CODE);
+        Log.d("mpesaurl",""+PASSKEY);
+        Log.d("mpesaurl",""+Integer.parseInt(amount));
+        Log.d("mpesaurl",""+
+                phone);
+        builder.setFirebaseRegID(token);
+        Log.d("mpesaurl",""+token);
+        com.bdhobare.mpesa.models.STKPush push = builder.build();
 
-            }
-        });
+
+
+        Mpesa.getInstance().pay(this, push);
+
     }
 
-    private void performSTKPush(String mobiledata) {
+    /*private void performSTKPush(String mobiledata) {
         mProgressDialog.setMessage("Processing…");
         mProgressDialog.setTitle("Please Wait");
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.show();
 
         String timestamp = Utils.getTimestamp();
+
+
+        Log.d("dataa",""+BUSINESS_SHORT_CODE);
+        Log.d("dataa",""+ Utils.getPassword(BUSINESS_SHORT_CODE, PASSKEY, timestamp));
+        Log.d("dataa",""+timestamp);
+        Log.d("dataa",""+ String.valueOf(amount));
+        Log.d("dataa",""+Utils.sanitizePhoneNumber(mobiledata));
+        Log.d("dataa",""+PARTYB);
+        Log.d("dataa",""+Utils.sanitizePhoneNumber(mobiledata));
+        Log.d("dataa",""+CALLBACKURL + mFireBaseRegId);
+        Log.d("dataa",""+mFireBaseRegId);
         STKPush stkPush = new STKPush(
                 BUSINESS_SHORT_CODE,
                 Utils.getPassword(BUSINESS_SHORT_CODE, PASSKEY, timestamp),
@@ -254,10 +285,16 @@ public class PaymentActivity extends AppCompatActivity {
                             }
                         }
 
+
+                        Log.d("post to API. %s", response.body().callBackURL + " ");
+                        Log.d("post to API. %s", response.body().accountReference + " ");
+                        Log.d("post to API. %s", response.body().amount + " ");
+                        Log.d("post to API. %s", response.body().timestamp + " ");
+                        Log.d("post to API. %s", response.body().partyA + " ");
+
                         confirmTrips(trip_id,sb);
 
 
-                        Log.d("post to API. %s", response.body().getAmount()+" ");
                     } else {
                         mProgressDialog.dismiss();
                         Toast.makeText(PaymentActivity.this, "Payment Failed Try Again", Toast.LENGTH_SHORT).show();
@@ -274,20 +311,14 @@ public class PaymentActivity extends AppCompatActivity {
             }
         });
     }
-
+*/
     @Override
     public void onBackPressed() {
         finish();
 
     }
 
-    private void getFirebaseRegId() {
-        mFireBaseRegId = mSharedPrefsUtil.getFirebaseRegistrationID();
 
-        if (!TextUtils.isEmpty(mFireBaseRegId)) {
-            mSharedPrefsUtil.saveFirebaseRegistrationID(mFireBaseRegId);
-        }
-    }
 
     public void showResultDialog(String result) {
         if (!mSharedPrefsUtil.getIsFirstTime()) {
@@ -388,5 +419,47 @@ public class PaymentActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onAuthError(Pair<Integer, String> result) {
 
+    }
+
+    @Override
+    public void onAuthSuccess() {
+
+    }
+
+    @Override
+    public void onMpesaError(Pair<Integer, String> result) {
+        mProgressDialog.dismiss();
+        Log.d("MpesaData",""+result.message);
+
+    }
+
+    @Override
+    public void onMpesaSuccess(String MerchantRequestID, String CheckoutRequestID, String CustomerMessage) {
+
+        Log.d("MpesaMerchantRequestID",""+MerchantRequestID);
+        Log.d("MpesaCheckoutRequestID",""+CheckoutRequestID);
+        Log.d("MpesaCustomerMessage",""+CustomerMessage);
+        final StringBuilder sb = new StringBuilder();
+        for(int i=0;i<mypassenger.size();i++)
+        {
+            //Log.d("productsssssssss",etList.get(i)+"");
+            if (i==mypassenger.size()-1)
+            {
+                sb.append(mypassenger.get(i)).append("");
+            }
+            else {
+                sb.append(mypassenger.get(i)).append(",");
+
+            }
+        }
+
+
+
+
+        confirmTrips(trip_id,sb);
+
+    }
 }

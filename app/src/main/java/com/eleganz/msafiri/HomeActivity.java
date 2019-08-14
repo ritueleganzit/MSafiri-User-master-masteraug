@@ -94,6 +94,7 @@ public class HomeActivity extends AppCompatActivity
     CurrentTripSession currentTripSession;
   //  private GoogleApiClient mGoogleApiClient;
     private String user_trip_status,login_type;
+    SharedPreferences devicetokenpref;
 
     String noti_message="",type="",ntrip_id="";
     GoogleApiClient mGoogleApiClient;
@@ -115,6 +116,7 @@ public class HomeActivity extends AppCompatActivity
         currentTripSession = new CurrentTripSession(HomeActivity.this);
 
         sessionManager.checkLogin();
+        devicetokenpref=getSharedPreferences("devicetoken",MODE_PRIVATE);
 
         sh_imagePreference = getSharedPreferences("imagepref", MODE_PRIVATE);
         imagePreference = sh_imagePreference.edit();
@@ -125,7 +127,6 @@ public class HomeActivity extends AppCompatActivity
         login_type = userData.get(SessionManager.LOGIN_TYPE);
 
 
-        Log.d("Namwww",""+user+" "+lname);
 
 noti_message=getIntent().getStringExtra("content");
         type=getIntent().getStringExtra("type");
@@ -206,7 +207,18 @@ noti_message=getIntent().getStringExtra("content");
             // doSomething
             if (!user.equalsIgnoreCase("null"))
             {
+
+
                 user_name.setText(user);
+                if (lname != null && !lname.isEmpty()) {
+                    if (!lname.equalsIgnoreCase("null"))
+                    {
+                        Log.d("Namwww",""+user+" "+lname);
+
+                        user_name.append(" "+lname);
+
+                    }
+                }
             }
 
 
@@ -395,6 +407,7 @@ noti_message=getIntent().getStringExtra("content");
         else if (id == R.id.nav_logout) {
             // sessionManager.logoutUser();
 
+            Log.d(TAG, "->" + devicetokenpref.getString("device",""));
 
             AlertDialog alertDialog=     new AlertDialog.Builder(this).setMessage("Are you sure you want to logout?").setCancelable(false)
 
@@ -470,6 +483,16 @@ noti_message=getIntent().getStringExtra("content");
                                         if (!jsonObject1.getString("fname").equalsIgnoreCase("null")) {
                                             user_name.setText(jsonObject1.getString("fname"));
 
+                                            if (jsonObject1.getString("lname")!=null && !(jsonObject1.getString("lname").isEmpty()))
+                                            {
+
+                                                // doSomething
+                                                if (!jsonObject1.getString("lname").equalsIgnoreCase("null")) {
+                                                    user_name.append(" "+jsonObject1.getString("lname"));
+
+
+                                                }
+                                            }
 
                                     }
                                 }
@@ -477,6 +500,10 @@ noti_message=getIntent().getStringExtra("content");
                                 {
                                     if (!user.equalsIgnoreCase("null")) {
                                         user_name.setText(""+user);
+                                        if (!lname.equalsIgnoreCase("null")) {
+                                            user_name.append(" "+lname);
+
+                                        }
 
                                     }
 
@@ -486,8 +513,10 @@ noti_message=getIntent().getStringExtra("content");
                                 imagePreference.commit();
                                 if (login_type.equalsIgnoreCase("manual")) {
 
+                                    if (!isFinishing())
                                     Glide.with(HomeActivity.this).load(jsonObject1.getString("photo")).apply(RequestOptions.circleCropTransform().placeholder(R.drawable.pr)).into(profile_image);
-sessionManager.updateImage(jsonObject1.getString("photo"));
+
+                                    sessionManager.updateImage(jsonObject1.getString("photo"));
                                 }
                             }
 
@@ -596,7 +625,7 @@ if (user_trip_status.equalsIgnoreCase("completed")) {
         RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint(BASEURL).build();
         final ApiInterface apiInterface = restAdapter.create(ApiInterface.class);
 
-        apiInterface.logoutclearToken("", user_id, new Callback<Response>() {
+        apiInterface.logoutclearToken(devicetokenpref.getString("device",""), user_id, new Callback<Response>() {
             @Override
             public void success(Response response, Response response2) {
                 try {

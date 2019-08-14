@@ -48,6 +48,7 @@
             app:digitBackground="@drawable/pin_bg"
             app:digitElevation="5dp"
 
+            app:digitTextColor="@android:color/black"
 
             app:digitSpacing="15dp"
             app:mask=""

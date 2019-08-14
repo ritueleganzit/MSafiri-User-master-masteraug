@@ -46,6 +46,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
+                                                <entry key="paddingPercent" value="5" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -55,10 +56,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="imageAsset" value="$PROJECT_DIR$/../speedometer.png" />
+                                      <entry key="assetType" value="IMAGE" />
+                                      <entry key="imageAsset" value="$PROJECT_DIR$/../../coin@2x.png" />
                                       <entry key="outputName" value="ic_wallet" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="9f9f9f" />
+                                      <entry key="themeColor" value="b6b6b6" />
                                     </map>
                                   </option>
                                 </PersistentState>

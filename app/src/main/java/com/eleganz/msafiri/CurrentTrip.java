@@ -483,7 +483,7 @@ public class CurrentTrip extends AppCompatActivity implements OnMapReadyCallback
 
                             fullname.setText(""+childObjct.getString("fullname"));
                             cr_destaddress.setText(""+childObjct.getString("to_address"));
-                            cr_calculate_time.setText(""+childObjct.getString("calculate_time"));
+                            cr_calculate_time.setText(""+childObjct.getString("datetime"));
 
                             String price=childObjct.getString("trip_price");
 

@@ -436,7 +436,7 @@ RatingBar ratingBar;
                                     fullname.setText(""+jsonObject1.getString("fullname"));
                                     cr_pickupaddress.setText(""+jsonObject1.getString("from_title"));
                                     cr_destaddress.setText(""+jsonObject1.getString("to_title"));
-                                    cr_calculate_time.setText(""+jsonObject1.getString("calculate_time")+"");
+                                    cr_calculate_time.setText(""+jsonObject1.getString("datetime")+"");
                                     if ((jsonObject1.getString("rating").equalsIgnoreCase("")) || (jsonObject1.getString("rating")).equalsIgnoreCase("null"))
 
                                     {

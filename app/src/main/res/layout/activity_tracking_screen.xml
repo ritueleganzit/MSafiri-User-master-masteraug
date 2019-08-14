@@ -63,7 +63,6 @@
             android:text="@string/no_cr_ride"/>
     </LinearLayout>
     <RelativeLayout
-        android:visibility="gone"
         android:layout_below="@+id/toolbar"
 
         android:id="@+id/layout_map"
@@ -91,20 +90,26 @@
         <RelativeLayout
             android:id="@+id/cnfrel"
             android:layout_width="match_parent"
-            android:layout_height="295dp"
+            android:layout_height="305dp"
             android:layout_above="@+id/lin5"
             android:layout_gravity="bottom">
 
             <RelativeLayout android:id="@+id/layoutBottom"
                 android:layout_width="match_parent"
-                android:layout_height="270dp"
+                android:layout_height="280dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/backgroundwhite"
                 xmlns:android="http://schemas.android.com/apk/res/android">
 
                 <RatingBar
                     android:id="@+id/ratingBar"
-                    style="?android:attr/ratingBarStyleSmall"
+                    style="@style/foodRatingBar"
+                    android:scaleX="0.4"
+                    android:focusable="false"
+                    android:isIndicator="true"
+                    android:clickable="false"
+                    android:focusableInTouchMode="false"
+                    android:scaleY="0.4"
                     android:progressTint="#bf1717"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="50dp"
@@ -125,7 +130,7 @@
                     android:layout_below="@+id/ratingBar"
                     android:text=""
 
-                    android:textAllCaps="true"
+                    android:textAllCaps="false"
                     android:textColor="#043A60"
 
                     android:textColorHint="#3B3B3B"
@@ -187,7 +192,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:gravity="center_horizontal"
-                    android:layout_width="250dp"
+                    android:layout_width="175dp"
                     android:id="@+id/imgdata"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -228,7 +233,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
 
-                        android:layout_width="80dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -238,8 +243,10 @@
                             android:layout_gravity="center"
                             android:textStyle="bold"
                             android:id="@+id/cr_pickup"
+                            android:textColor="@color/colorPrimaryDark"
+
                             android:layout_width="wrap_content"                       android:layout_height="wrap_content"
-                            android:text="Pickup" />
+                            android:text="Pickup Location" />
                         <com.eleganz.msafiri.lib.RobotoMediumTextView
                             android:gravity="center"
                             android:ellipsize="marquee"
@@ -287,9 +294,10 @@
                             android:textStyle="bold"
                             android:gravity="center"
                             android:id="@+id/cr_dest"
-                            android:layout_width="80dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Destination" />
+                            android:text="Drop Location"
+                            android:textColor="@color/colorPrimaryDark"/>
                         <com.eleganz.msafiri.lib.RobotoMediumTextView
                             android:id="@+id/cr_destaddress"
                             android:gravity="center"

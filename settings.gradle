@@ -1,2 +1,2 @@
-include ':app', ':multi-image-selector'
+include ':app', ':multi-image-selector', ':mpesa'
 project(':multi-image-selector').projectDir = new File('multi-image-selector')

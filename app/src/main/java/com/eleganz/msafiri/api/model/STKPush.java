@@ -27,27 +27,27 @@ import com.google.gson.annotations.SerializedName;
 public class STKPush {
 
     @SerializedName("BusinessShortCode")
-    private String businessShortCode;
+    public String businessShortCode;
     @SerializedName("Password")
-    private String password;
+    public String password;
     @SerializedName("Timestamp")
-    private String timestamp;
+    public String timestamp;
     @SerializedName("TransactionType")
-    private String transactionType;
+    public String transactionType;
     @SerializedName("Amount")
-    private String amount;
+    public String amount;
     @SerializedName("PartyA")
-    private String partyA;
+    public String partyA;
     @SerializedName("PartyB")
-    private String partyB;
+    public String partyB;
     @SerializedName("PhoneNumber")
-    private String phoneNumber;
+    public String phoneNumber;
     @SerializedName("CallBackURL")
-    private String callBackURL;
+    public String callBackURL;
     @SerializedName("AccountReference")
-    private String accountReference;
+    public String accountReference;
     @SerializedName("TransactionDesc")
-    private String transactionDesc;
+    public String transactionDesc;
 
     public STKPush(String businessShortCode, String password, String timestamp, String transactionType,
                    String amount, String partyA, String partyB, String phoneNumber, String callBackURL,

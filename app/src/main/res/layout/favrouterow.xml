@@ -28,7 +28,7 @@
 
 
 
-            <com.eleganz.msafiri.lib.RobotoMediumTextView
+            <com.eleganz.msafiri.lib.RobotoRegularTextView
                 android:id="@+id/fav_pickup"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
             android:orientation="vertical">
 
 
-                <com.eleganz.msafiri.lib.RobotoMediumTextView
+                <com.eleganz.msafiri.lib.RobotoRegularTextView
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/colorPrimaryDark"

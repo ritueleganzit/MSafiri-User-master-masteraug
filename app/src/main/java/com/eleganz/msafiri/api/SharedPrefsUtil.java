@@ -47,7 +47,7 @@ public class SharedPrefsUtil {
     }
 
     public String getFirebaseRegistrationID() {
-        return pref.getString("regId", null);
+        return pref.getString("regId", "d-a3OT1StYY:APA91bFc0b4Eeb5nroUNdM348MouBO9JVQLzBDBgdFqMgEesY20pcZf-oK27M_Hfhp8JFTp6sZClAFgYStmbDtkxvGGjeS7BQcItEr719JWivUvFDxMtKWcTUVG6UHnL_3GDu1s6iPNQd-a3OT1StYY:APA91bFc0b4Eeb5nroUNdM348MouBO9JVQLzBDBgdFqMgEesY20pcZf-oK27M_Hfhp8JFTp6sZClAFgYStmbDtkxvGGjeS7BQcItEr719JWivUvFDxMtKWcTUVG6UHnL_3GDu1s6iPNQ");
     }
 
     public void saveIsFirstTime(boolean isFirstTime) {

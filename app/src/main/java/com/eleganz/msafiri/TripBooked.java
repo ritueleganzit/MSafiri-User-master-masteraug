@@ -232,7 +232,7 @@ StringBuilder stringBuilder;
         destlocaddress.setText(""+historyData.getTo_address());
         driver_txt1.setText(""+historyData.getFullname());
         vehicle_tx1.setText(""+historyData.getVehicle_name());
-        calculate_time.setText(""+historyData.getCalculate_time());
+        calculate_time.setText(historyData.getDate());
 spotsDialog.show();
         getPassanger();
         findViewById(R.id.tellbtn).setOnClickListener(new View.OnClickListener() {

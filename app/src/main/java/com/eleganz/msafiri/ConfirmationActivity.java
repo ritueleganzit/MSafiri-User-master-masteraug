@@ -222,7 +222,7 @@ apiInterface.getSingleTripData(trip_id, new Callback<Response>() {
                     fullname.setText(childObjct.getString("fullname"));
                     from_address.setText(childObjct.getString("from_address"));
                     to_address.setText(childObjct.getString("to_address"));
-                    duration.setText(childObjct.getString("calculate_time"));
+                    duration.setText(childObjct.getString("datetime"));
 
                     String imgurl=childObjct.getString("photo");
 

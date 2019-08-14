@@ -34,7 +34,7 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
 
                 android:textStyle="bold"
-                android:text="Confirmation"
+                android:text="Confirm"
                 android:textColor="@android:color/white"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -64,21 +64,27 @@ android:layout_above="@+id/dummyrel"
 
    <RelativeLayout
        android:layout_width="match_parent"
-       android:layout_height="325dp"
+       android:layout_height="355dp"
        android:id="@+id/cnfrel"
        android:layout_alignParentBottom="true"
        android:layout_gravity="bottom">
 
        <RelativeLayout android:id="@+id/layoutBottom"
            android:layout_width="match_parent"
-           android:layout_height="300dp"
+           android:layout_height="330dp"
            android:layout_alignParentBottom="true"
            android:background="@drawable/backgroundwhite"
            xmlns:android="http://schemas.android.com/apk/res/android">
 
            <RatingBar
                android:id="@+id/ratingBar"
-               style="?android:attr/ratingBarStyleSmall"
+               style="@style/foodRatingBar"
+               android:scaleX="0.4"
+               android:focusable="false"
+               android:isIndicator="true"
+               android:clickable="false"
+               android:focusableInTouchMode="false"
+               android:scaleY="0.4"
                android:progressTint="#bf1717"
                android:layout_centerHorizontal="true"
                android:layout_marginTop="50dp"
@@ -95,7 +101,7 @@ android:layout_above="@+id/dummyrel"
                android:layout_centerHorizontal="true"
                android:layout_below="@+id/ratingBar"
                android:text=""
-               android:textAllCaps="true"
+               android:textAllCaps="false"
                android:textColor="#043A60"
 
                android:textColorHint="#3B3B3B"
@@ -185,17 +191,21 @@ android:layout_above="@+id/dummyrel"
                    android:layout_alignParentStart="true"
                    android:layout_alignParentLeft="true"
 
-                   android:layout_width="80dp"
+                   android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:orientation="vertical">
 
                    <TextView
+                       android:fontFamily="@font/roboto_bold"
                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                        android:gravity="center"
                        android:layout_gravity="center"
                        android:textStyle="bold"
-                       android:layout_width="wrap_content"                       android:layout_height="wrap_content"
-                       android:text="Pickup" />
+                       android:textColor="@color/colorPrimaryDark"
+
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Pickup Location" />
                    <com.eleganz.msafiri.lib.RobotoMediumTextView
                        android:id="@+id/from_address"
                        android:gravity="center"
@@ -219,6 +229,7 @@ android:layout_alignParentTop="true"
                        android:layout_gravity="center"
                        android:gravity="center"
                        android:textStyle="bold"
+
                        android:textColor="@color/colorPrimary"
                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                        android:layout_width="wrap_content"
@@ -237,11 +248,12 @@ android:layout_alignParentTop="true"
                    <TextView
                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                        android:textStyle="bold"
+                       android:fontFamily="@font/roboto_bold"
                        android:gravity="center"
-                       android:fontFamily="@font/roboto_regular"
-                       android:layout_width="80dp"
+                     android:textColor="@color/colorPrimaryDark"
+                       android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
-                       android:text="Destination" />
+                       android:text="Drop Location"  />
                    <com.eleganz.msafiri.lib.RobotoMediumTextView
                        android:id="@+id/to_address"
                        android:gravity="center"

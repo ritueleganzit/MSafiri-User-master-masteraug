@@ -31,7 +31,9 @@ import android.widget.Toast;
 import com.eleganz.msafiri.FindRideActivity;
 import com.eleganz.msafiri.R;
 import com.eleganz.msafiri.TellYourDriverActivity;
+import com.eleganz.msafiri.lib.RobotoBoldTextView;
 import com.eleganz.msafiri.lib.RobotoMediumTextView;
+import com.eleganz.msafiri.lib.RobotoRegularTextView;
 import com.eleganz.msafiri.model.ContactModel;
 import com.eleganz.msafiri.model.FavouritesData;
 import com.eleganz.msafiri.session.SessionManager;
@@ -80,7 +82,7 @@ public class MapFragment extends Fragment {
     String strEditText1, strEditText2;
 Button searchbtn;
 
-    RobotoMediumTextView no_of_seats;
+    RobotoBoldTextView no_of_seats;
     CardView  card2;
     private static final int PLACE_PICKER_REQUEST2 = 1001;
 
@@ -100,7 +102,7 @@ Button searchbtn;
     Calendar myCalendar = Calendar.getInstance();
 
     ArrayList<String>  toarrayList=new ArrayList<>();
-    RobotoMediumTextView roboto,date_selected;
+    RobotoBoldTextView roboto,date_selected;
     RecyclerView fav_rec;
     private static final String TAG = "DataLog";
     private static final int PLACE_PICKER_REQUEST = 1000;
@@ -751,6 +753,7 @@ Log.d("dsdsssdf",""+user_id);
             @Override
             public void failure(RetrofitError error) {
                 txt_fav.setVisibility(View.VISIBLE);
+                if (getActivity().isFinishing())
                 Toast.makeText(getActivity(), "Network or server error, please try again later.", Toast.LENGTH_LONG).show();
 
             }
@@ -803,7 +806,7 @@ from_pickup.setText(favouritesData.getFrom_title());
         }
 
         public class FavRoutesViewHolder extends RecyclerView.ViewHolder {
-            RobotoMediumTextView fav_des,fav_pickup;
+            TextView fav_des,fav_pickup;
             public FavRoutesViewHolder(View itemView) {
                 super(itemView);
                 fav_des=itemView.findViewById(R.id.fav_des);

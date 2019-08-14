@@ -15,6 +15,11 @@
         <item name="android:textColor">@color/error</item>
 
     </style>
+    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar_selector</item>
+        <item name="android:minHeight">43dip</item>
+        <item name="android:maxHeight">83dip</item>
+    </style>
     <style name="AppThemeData" parent="Theme.AppCompat.Light.NoActionBar">
 
     <item name="colorPrimary">@color/colorPrimary</item>
