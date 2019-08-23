@@ -150,16 +150,12 @@ date_selected.setText(""+getCurrentTimeStamp());
 
 
                         String smonth,sday;
-                        if (month<10)
-                        {
-                            smonth="0"+(month+1);
-
+                        String monthString = String.valueOf(month+1);
+                        if (monthString.length() == 1) {
+                            monthString = "0" + monthString;
                         }
-                        else
-                        {
-                            smonth=""+(month+1);
 
-                        }
+
 
                         if (dayOfMonth<10)
                         {
@@ -172,7 +168,7 @@ date_selected.setText(""+getCurrentTimeStamp());
 
                         }
 
-                        date_selected.setText(""+year+"-"+smonth+"-"+sday);
+                        date_selected.setText(""+year+"-"+monthString+"-"+sday);
 
 
 
